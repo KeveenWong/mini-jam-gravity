@@ -1,4 +1,4 @@
-﻿// CHANGE LOG
+// CHANGE LOG
 // 
 // CHANGES || version VERSION
 //
@@ -67,7 +67,7 @@ public class FirstPersonController : MonoBehaviour
 
   #region Sprint
 
-  public bool enableSprint = true;
+  public bool enableSprint = false;
   public bool unlimitedSprint = false;
   public KeyCode sprintKey = KeyCode.C;
   public float sprintSpeed = 7f;
@@ -100,8 +100,8 @@ public class FirstPersonController : MonoBehaviour
   public bool enableDash = true;
   public bool unlimitedDash = false;
   public KeyCode dashKey = KeyCode.LeftShift;
-  public float dashDistance = 10f;
-  public float dashDuration = 0.2f;
+  public float dashDistance = 50f;
+  public float dashDuration = 0.5f;
   private float dashStartTime;
   private Vector3 dashStartPosition;
   private Vector3 dashEndPosition;
@@ -132,6 +132,9 @@ public class FirstPersonController : MonoBehaviour
   private bool isDashCooldown = false;
 
   private float dashCooldownReset;
+
+  private bool wantsToDash = false;
+  private Vector3 dashMoveDirection;
 
   #endregion
 
@@ -407,26 +410,20 @@ public class FirstPersonController : MonoBehaviour
         float dashProgress = (Time.time - dashStartTime) / dashDuration;
         if (dashProgress < 1f)
         {
+          // Move towards dash end position
           transform.position = Vector3.Lerp(dashStartPosition, dashEndPosition, dashProgress);
+          playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, dashFOV, dashFOVStepTime * Time.deltaTime);
         }
         else
         {
           isDashing = false;
-        }
-
-        isZoomed = false;
-        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, dashFOV, dashFOVStepTime * Time.deltaTime);
-
-        // Drain dash remaining while dashing
-        if (!unlimitedDash)
-        {
-          dashRemaining = 0; // dash set to 0 if dash is used
-          if (dashRemaining <= 0)
+          if (!unlimitedDash)
           {
-            isDashing = false;
             isDashCooldown = true;
           }
         }
+
+        isZoomed = false;
       }
       else
       {
@@ -435,13 +432,20 @@ public class FirstPersonController : MonoBehaviour
       }
 
       // Handles dash cooldown 
-      // When dash remaining == 0 stops dash ability until hitting cooldown
       if (isDashCooldown)
       {
-        dashCooldown -= 1 * Time.deltaTime;
+        dashCooldown -= Time.deltaTime;
         if (dashCooldown <= 0)
         {
           isDashCooldown = false;
+          dashRemaining = dashDuration;
+        }
+
+        // Update dash bar during cooldown
+        if (useDashBar && !unlimitedDash && dashBar != null)
+        {
+          float cooldownProgress = dashCooldown / dashCooldownReset;
+          dashBar.transform.localScale = new Vector3(1f - cooldownProgress, 1f, 1f);
         }
       }
       else
@@ -449,8 +453,8 @@ public class FirstPersonController : MonoBehaviour
         dashCooldown = dashCooldownReset;
       }
 
-      // Handles dashBar 
-      if (useDashBar && !unlimitedDash)
+      // Handles dashBar when not in cooldown
+      if (useDashBar && !unlimitedDash && dashBar != null && !isDashCooldown)
       {
         float dashRemainingPercent = dashRemaining / dashDuration;
         dashBar.transform.localScale = new Vector3(dashRemainingPercent, 1f, 1f);
@@ -464,6 +468,7 @@ public class FirstPersonController : MonoBehaviour
     // Gets input and calls jump method
     if (enableJump && Input.GetKeyDown(jumpKey) && isGrounded)
     {
+      Debug.Log("Jump");
       Jump();
     }
 
@@ -474,6 +479,27 @@ public class FirstPersonController : MonoBehaviour
     if (enableHeadBob)
     {
       HeadBob();
+    }
+
+    // Check for dash input in Update
+    if (enableDash && Input.GetKeyDown(dashKey) && !isDashing)
+    {
+      Debug.Log($"Dash key pressed - Cooldown: {isDashCooldown}, Remaining: {dashRemaining}, Can Dash: {dashRemaining > 0f && !isDashCooldown}");
+      
+      if (dashRemaining > 0f && !isDashCooldown)
+      {
+        wantsToDash = true;
+        // Calculate dash direction here so it matches the exact moment of input
+        dashMoveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        if (dashMoveDirection.magnitude < 0.1f)
+        {
+          dashMoveDirection = transform.forward;
+        }
+        else
+        {
+          dashMoveDirection = transform.TransformDirection(dashMoveDirection);
+        }
+      }
     }
   }
 
@@ -486,45 +512,29 @@ public class FirstPersonController : MonoBehaviour
       // Calculate how fast we should be moving
       Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-      // All movement calculations while dash is active
-      if (enableDash && Input.GetKeyDown(dashKey) && dashRemaining > 0f && !isDashCooldown)
+      // Handle dash physics in FixedUpdate
+      if (wantsToDash)
       {
-
         // Set dashing state
         isDashing = true;
+        wantsToDash = false;
         dashStartTime = Time.time;
 
-        // Apply the dash movement
-        Vector3 dashDirection = transform.forward;
-        dashDirection.y = 0; // Ensure the dash does not affect the Y-axis
-        rb.AddForce(dashDirection.normalized * dashDistance, ForceMode.VelocityChange);
+        // Calculate dash positions using the direction from Update
+        dashStartPosition = transform.position;
+        dashEndPosition = dashStartPosition + (dashMoveDirection * dashDistance);
 
-        // Show dash bar if applicable
-        if (hideDashBarWhenFull && !unlimitedDash)
-        {
-          dashBarCG.alpha += 5 * Time.deltaTime;
-        }
+        // Zero out vertical velocity to prevent floating
+        Vector3 currentVelocity = rb.linearVelocity;
+        currentVelocity.y = 0;
+        rb.linearVelocity = currentVelocity;
 
         // Drain dash remaining
         if (!unlimitedDash)
         {
           dashRemaining = 0;
-          if (dashRemaining <= 0)
-          {
-            isDashCooldown = true;
-          }
+          isDashCooldown = true;
         }
-      }
-
-      // Checks if player is walking and isGrounded
-      // Will allow head bob
-      if (targetVelocity.x != 0 || targetVelocity.z != 0 && isGrounded)
-      {
-        isWalking = true;
-      }
-      else
-      {
-        isWalking = false;
       }
 
       // All movement calculations while sprint is active
@@ -796,7 +806,7 @@ public class FirstPersonControllerEditor : Editor
 
 
     //GUI.enabled = !fpc.unlimitedDash;
-    fpc.dashDuration = EditorGUILayout.Slider(new GUIContent("Dash Duration", "Determines how long the player can dash while unlimited dash is disabled."), fpc.dashDuration, 1f, 20f);
+    fpc.dashDuration = EditorGUILayout.Slider(new GUIContent("Dash Duration", "Determines how long the player can dash while unlimited dash is disabled."), fpc.dashDuration, 0.1f, 20f);
     fpc.dashCooldown = EditorGUILayout.Slider(new GUIContent("Dash Cooldown", "Determines how long the recovery time is when the player runs out of dash."), fpc.dashCooldown, 0f, 20f);
     //GUI.enabled = true;
 
