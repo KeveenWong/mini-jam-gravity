@@ -61,6 +61,7 @@ public class FirstPersonController : MonoBehaviour
   public bool playerCanMove = true;
   public float walkSpeed = 5f;
   public float maxVelocityChange = 10f;
+  private Vector3 initialPosition;
 
   // Internal Variables
   private bool isWalking = false;
@@ -186,6 +187,15 @@ public class FirstPersonController : MonoBehaviour
       dashRemaining = dashDuration;
       dashCooldownReset = dashCooldown;
     }
+
+    // Initial position for resetting on death
+    initialPosition = transform.position;
+  }
+
+  public void ResetPosition()
+  {
+    transform.position = initialPosition;
+    rb.linearVelocity = Vector3.zero;
   }
 
   void Start()
@@ -277,6 +287,12 @@ public class FirstPersonController : MonoBehaviour
 
   private void Update()
   {
+    // Example: Reset position when the 'R' key is pressed
+    if (Input.GetKeyDown(KeyCode.R))
+    {
+        ResetPosition();
+    }
+    
     #region Camera
 
     // Control camera movement
