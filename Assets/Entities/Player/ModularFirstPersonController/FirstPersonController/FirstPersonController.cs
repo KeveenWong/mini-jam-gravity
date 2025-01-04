@@ -198,6 +198,14 @@ public class FirstPersonController : MonoBehaviour
     rb.linearVelocity = Vector3.zero;
   }
 
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.CompareTag("Obstacle"))
+    {
+      ResetPosition();
+    }
+  }
+
   void Start()
   {
     if (lockCursor)
@@ -287,12 +295,12 @@ public class FirstPersonController : MonoBehaviour
 
   private void Update()
   {
-    // Example: Reset position when the 'R' key is pressed
+    // Test for reset position
     if (Input.GetKeyDown(KeyCode.R))
     {
-        ResetPosition();
+      ResetPosition();
     }
-    
+
     #region Camera
 
     // Control camera movement
