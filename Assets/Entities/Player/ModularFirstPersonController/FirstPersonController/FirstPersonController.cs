@@ -4,10 +4,12 @@
 //
 // "Enable/Disable Headbob, Changed look rotations - should result in reduced camera jitters" || version 1.0.1
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using System.Collections;
+using System.Collections.Generic;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -167,6 +169,18 @@ public class FirstPersonController : MonoBehaviour
 
   #endregion
 
+  private UnityEngine.Rendering.Universal.MotionBlur motionBlurURP;
+  private VolumeProfile volumeProfile;
+  private Volume globalVolume;
+
+  [Header("Motion Blur Settings")]
+  public bool enableMotionBlur = true;
+  [Range(0, 1)]
+  public float defaultBlurAmount = 1.0f;  // Maximum blur always
+  [Range(0, 1)]
+  public float dashBlurAmount = 1.0f;     // Maximum blur during dash
+  public float blurLerpSpeed = 50f;       // Super fast transitions
+
   private void Awake()
   {
     rb = GetComponent<Rigidbody>();
@@ -188,6 +202,34 @@ public class FirstPersonController : MonoBehaviour
     {
       dashRemaining = dashDuration;
       dashCooldownReset = dashCooldown;
+    }
+
+    // Setup URP post processing
+    globalVolume = FindObjectOfType<Volume>();
+    if (globalVolume != null && globalVolume.profile != null)
+    {
+        volumeProfile = globalVolume.profile;
+        if (!volumeProfile.TryGet(out motionBlurURP))
+        {
+            Debug.Log("Adding Motion Blur effect to URP profile");
+            volumeProfile.Add<UnityEngine.Rendering.Universal.MotionBlur>(false);
+            volumeProfile.TryGet(out motionBlurURP);
+        }
+
+        if (motionBlurURP != null)
+        {
+            motionBlurURP.active = true;
+            motionBlurURP.intensity.value = defaultBlurAmount;
+            Debug.Log("URP Motion Blur initialized successfully");
+        }
+        else
+        {
+            Debug.LogError("Failed to initialize URP Motion Blur");
+        }
+    }
+    else
+    {
+        Debug.LogError("Volume or Profile not found!");
     }
   }
 
@@ -501,9 +543,44 @@ public class FirstPersonController : MonoBehaviour
         }
       }
     }
+
+    #region Motion Blur
+    if (enableMotionBlur && motionBlurURP != null)
+    {
+        float targetBlur = 0f;
+        
+        // Increase blur during dash
+        if (isDashing)
+        {
+            targetBlur = dashBlurAmount;
+            Debug.Log($"Dashing - Setting max blur");
+        }
+        // Add high blur during normal movement
+        else if (rb.linearVelocity.magnitude > 0.1f)
+        {
+            // Always use maximum blur when moving
+            targetBlur = defaultBlurAmount;
+            Debug.Log($"Moving - Setting max blur");
+        }
+        
+        // Smoothly transition blur amount (very fast now)
+        float currentBlur = motionBlurURP.intensity.value;
+        motionBlurURP.intensity.value = Mathf.Lerp(currentBlur, targetBlur, Time.deltaTime * blurLerpSpeed);
+        
+        // Make sure the effect stays enabled and maximized
+        motionBlurURP.active = true;
+        
+        // Force maximum intensity if we're moving or dashing
+        if (isDashing || rb.linearVelocity.magnitude > 0.1f)
+        {
+            motionBlurURP.intensity.value = 1.0f;
+        }
+    }
+    #endregion
+
   }
 
-  void FixedUpdate()
+  private void FixedUpdate()
   {
     #region Movement
 
@@ -777,7 +854,6 @@ public class FirstPersonControllerEditor : Editor
       fpc.sprintBar = (Image)EditorGUILayout.ObjectField(fpc.sprintBar, typeof(Image), true);
       EditorGUILayout.EndHorizontal();
 
-
       EditorGUILayout.BeginHorizontal();
       fpc.sprintBarWidthPercent = EditorGUILayout.Slider(new GUIContent("Bar Width", "Determines the width of the sprint bar."), fpc.sprintBarWidthPercent, .1f, .5f);
       EditorGUILayout.EndHorizontal();
@@ -825,7 +901,7 @@ public class FirstPersonControllerEditor : Editor
       EditorGUILayout.EndHorizontal();
 
       EditorGUILayout.BeginHorizontal();
-      EditorGUILayout.PrefixLabel(new GUIContent("Bar BG", "Object to be used as sprint bar background."));
+      EditorGUILayout.PrefixLabel(new GUIContent("Bar BG", "Object to be used as dash bar background."));
       fpc.dashBarBG = (Image)EditorGUILayout.ObjectField(fpc.dashBarBG, typeof(Image), true);
       EditorGUILayout.EndHorizontal();
 
@@ -833,7 +909,6 @@ public class FirstPersonControllerEditor : Editor
       EditorGUILayout.PrefixLabel(new GUIContent("Bar", "Object to be used as dash bar foreground."));
       fpc.dashBar = (Image)EditorGUILayout.ObjectField(fpc.dashBar, typeof(Image), true);
       EditorGUILayout.EndHorizontal();
-
 
       EditorGUILayout.BeginHorizontal();
       fpc.dashBarWidthPercent = EditorGUILayout.Slider(new GUIContent("Bar Width", "Determines the width of the dash bar."), fpc.dashBarWidthPercent, .1f, .5f);
@@ -881,6 +956,23 @@ public class FirstPersonControllerEditor : Editor
     fpc.joint = (Transform)EditorGUILayout.ObjectField(new GUIContent("Camera Joint", "Joint object position is moved while head bob is active."), fpc.joint, typeof(Transform), true);
     fpc.bobSpeed = EditorGUILayout.Slider(new GUIContent("Speed", "Determines how often a bob rotation is completed."), fpc.bobSpeed, 1, 20);
     fpc.bobAmount = EditorGUILayout.Vector3Field(new GUIContent("Bob Amount", "Determines the amount the joint moves in both directions on every axes."), fpc.bobAmount);
+    GUI.enabled = true;
+
+    #endregion
+
+    #region Motion Blur
+
+    EditorGUILayout.Space();
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Motion Blur Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+    fpc.enableMotionBlur = EditorGUILayout.ToggleLeft(new GUIContent("Enable Motion Blur", "Determines if the motion blur effect is active."), fpc.enableMotionBlur);
+
+    GUI.enabled = fpc.enableMotionBlur;
+    fpc.defaultBlurAmount = EditorGUILayout.Slider(new GUIContent("Default Blur Amount", "Determines the default amount of blur applied to the camera."), fpc.defaultBlurAmount, 0f, 1f);
+    fpc.dashBlurAmount = EditorGUILayout.Slider(new GUIContent("Dash Blur Amount", "Determines the amount of blur applied to the camera while dashing."), fpc.dashBlurAmount, 0f, 1f);
+    fpc.blurLerpSpeed = EditorGUILayout.Slider(new GUIContent("Blur Lerp Speed", "Determines how fast the blur amount changes."), fpc.blurLerpSpeed, 0f, 10f);
     GUI.enabled = true;
 
     #endregion
