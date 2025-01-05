@@ -229,7 +229,7 @@ public class FirstPersonController : MonoBehaviour
       float horizontalForce = 100f;
         
       // rb.linearVelocity = Vector3.zero; // Reset velocity
-      rb.AddForce(new Vector3(bounceDirection.x * horizontalForce, upwardForce, bounceDirection.z * horizontalForce), ForceMode.Impulse);
+      rb.AddForce(new Vector3(bounceDirection.x * horizontalForce, upwardForce, bounceDirection.z * horizontalForce), ForceMode.VelocityChange);
       // ResetPosition();
     }
   }
