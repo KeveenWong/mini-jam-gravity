@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -61,6 +63,7 @@ public class FirstPersonController : MonoBehaviour
   public bool playerCanMove = true;
   public float walkSpeed = 5f;
   public float maxVelocityChange = 10f;
+  private Vector3 initialPosition;
 
   // Internal Variables
   private bool isWalking = false;
@@ -70,7 +73,7 @@ public class FirstPersonController : MonoBehaviour
   public bool enableSprint = false;
   public bool unlimitedSprint = false;
   public KeyCode sprintKey = KeyCode.C;
-  public float sprintSpeed = 7f;
+  public float sprintSpeed = 20f;
   public float sprintDuration = 5f;
   public float sprintCooldown = .5f;
   public float sprintFOV = 80f;
@@ -100,11 +103,10 @@ public class FirstPersonController : MonoBehaviour
   public bool enableDash = true;
   public bool unlimitedDash = false;
   public KeyCode dashKey = KeyCode.LeftShift;
-  public float dashDistance = 50f;
+  public float dashForce = 0.5f;
   public float dashDuration = 0.5f;
   private float dashStartTime;
-  private Vector3 dashStartPosition;
-  private Vector3 dashEndPosition;
+  private Vector3 dashDirection;
   public float dashCooldown = 0f;
   public float dashFOV = 80f;
   public float dashFOVStepTime = 10f;
@@ -167,8 +169,21 @@ public class FirstPersonController : MonoBehaviour
 
   #endregion
 
+  #region Particles
+  [SerializeField] ParticleSystem forwardDashParticleSystem;
+  [SerializeField] ParticleSystem backwardDashParticleSystem;
+  [SerializeField] ParticleSystem leftDashParticleSystem;
+  [SerializeField] ParticleSystem rightDashParticleSystem;
+
+  #endregion
+
   private void Awake()
   {
+    forwardDashParticleSystem = GameObject.Find("ForwardDashParticles").GetComponent<ParticleSystem>();
+    backwardDashParticleSystem = GameObject.Find("BackwardDashParticles").GetComponent<ParticleSystem>();
+    leftDashParticleSystem = GameObject.Find("LeftDashParticles").GetComponent<ParticleSystem>();
+    rightDashParticleSystem = GameObject.Find("RightDashParticles").GetComponent<ParticleSystem>();
+
     rb = GetComponent<Rigidbody>();
 
     crosshairObject = GetComponentInChildren<Image>();
@@ -189,7 +204,37 @@ public class FirstPersonController : MonoBehaviour
       dashRemaining = dashDuration;
       dashCooldownReset = dashCooldown;
     }
+
+    // Initial position for resetting on death
+    initialPosition = transform.position;
   }
+
+
+  public void ResetPosition()
+  {
+    transform.position = initialPosition;
+    rb.linearVelocity = Vector3.zero;
+  }
+
+
+  #region Collision
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.CompareTag("Obstacle"))
+    {
+      Vector3 bounceDirection = (transform.position - other.transform.position).normalized;
+      // Debug.Log(bounceDirection);
+      // Preserve the horizontal direction while adding upward force
+      float upwardForce = 20f;
+      float horizontalForce = 100f;
+        
+      // rb.linearVelocity = Vector3.zero; // Reset velocity
+      rb.AddForce(new Vector3(bounceDirection.x * horizontalForce, upwardForce, bounceDirection.z * horizontalForce), ForceMode.VelocityChange);
+      // ResetPosition();
+    }
+  }
+
+  #endregion
 
   void Start()
   {
@@ -280,6 +325,12 @@ public class FirstPersonController : MonoBehaviour
 
   private void Update()
   {
+    // Test for reset position
+    if (Input.GetKeyDown(KeyCode.R))
+    {
+      ResetPosition();
+    }
+
     #region Camera
 
     // Control camera movement
@@ -410,8 +461,8 @@ public class FirstPersonController : MonoBehaviour
         float dashProgress = (Time.time - dashStartTime) / dashDuration;
         if (dashProgress < 1f)
         {
-          // Move towards dash end position
-          transform.position = Vector3.Lerp(dashStartPosition, dashEndPosition, dashProgress);
+          // Apply force in dash direction
+          rb.AddForce(dashDirection * dashForce, ForceMode.Impulse);
           playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, dashFOV, dashFOVStepTime * Time.deltaTime);
         }
         else
@@ -485,7 +536,7 @@ public class FirstPersonController : MonoBehaviour
     if (enableDash && Input.GetKeyDown(dashKey) && !isDashing)
     {
       Debug.Log($"Dash key pressed - Cooldown: {isDashCooldown}, Remaining: {dashRemaining}, Can Dash: {dashRemaining > 0f && !isDashCooldown}");
-      
+
       if (dashRemaining > 0f && !isDashCooldown)
       {
         wantsToDash = true;
@@ -521,13 +572,10 @@ public class FirstPersonController : MonoBehaviour
         dashStartTime = Time.time;
 
         // Calculate dash positions using the direction from Update
-        dashStartPosition = transform.position;
-        dashEndPosition = dashStartPosition + (dashMoveDirection * dashDistance);
+        dashDirection = dashMoveDirection;
 
-        // Zero out vertical velocity to prevent floating
-        Vector3 currentVelocity = rb.linearVelocity;
-        currentVelocity.y = 0;
-        rb.linearVelocity = currentVelocity;
+        // Play dash particles
+        PlayDashParticles();
 
         // Drain dash remaining
         if (!unlimitedDash)
@@ -641,6 +689,54 @@ public class FirstPersonController : MonoBehaviour
       joint.localPosition = new Vector3(Mathf.Lerp(joint.localPosition.x, jointOriginalPos.x, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.y, jointOriginalPos.y, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.z, jointOriginalPos.z, Time.deltaTime * bobSpeed));
     }
   }
+
+  private void PlayDashParticles()
+  {
+    // Vector3 inputVector = dashMoveDirection;
+    // Debug.Log(Input.GetKey());
+    // Determine the direction of the dash and play the appropriate particle system
+    float verticalInput = Input.GetAxis("Vertical");
+    float horizontalInput = Input.GetAxis("Horizontal");
+
+    if (verticalInput > 0) {
+      forwardDashParticleSystem.Play();
+      Debug.Log("Forward Dash");
+    } else if (verticalInput < 0) {
+      backwardDashParticleSystem.Play();
+      Debug.Log("Backward Dash");
+    } else if (horizontalInput < 0) {
+      leftDashParticleSystem.Play();
+    } else if (horizontalInput > 0) {
+      rightDashParticleSystem.Play();
+    }
+
+    // // if (inputVector.z > 0 && Mathf.Abs(inputVector.x) <= inputVector.z) // Forward dash
+    // if (Input.GetKey(KeyCode.W) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+    // {
+    //   forwardDashParticleSystem.Play();
+    //   return;
+    // }
+    // // if (inputVector.z < 0 && Mathf.Abs(inputVector.x) <= inputVector.z) // Backward dash
+    // if (Input.GetKey(KeyCode.S) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+    // {
+    //   backwardDashParticleSystem.Play();
+    //   return;
+    // }
+    // // if (inputVector.x > 0) // Right dash
+    // if (Input.GetKey(KeyCode.D) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+    // {
+    //   rightDashParticleSystem.Play();
+    //   return;
+    // }
+    // // if (inputVector.x < 0) // Left dash
+    // if (Input.GetKey(KeyCode.A) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+    // {
+    //   leftDashParticleSystem.Play();
+    //   return;
+    // }
+
+    // forwardDashParticleSystem.Play();
+  }
 }
 
 
@@ -732,7 +828,7 @@ public class FirstPersonControllerEditor : Editor
     fpc.playerCanMove = EditorGUILayout.ToggleLeft(new GUIContent("Enable Player Movement", "Determines if the player is allowed to move."), fpc.playerCanMove);
 
     GUI.enabled = fpc.playerCanMove;
-    fpc.walkSpeed = EditorGUILayout.Slider(new GUIContent("Walk Speed", "Determines how fast the player will move while walking."), fpc.walkSpeed, .1f, fpc.sprintSpeed);
+    fpc.walkSpeed = EditorGUILayout.Slider(new GUIContent("Walk Speed", "Determines how fast the player will move while walking."), fpc.walkSpeed, 1f, 20f);
     GUI.enabled = true;
 
     EditorGUILayout.Space();
@@ -777,7 +873,6 @@ public class FirstPersonControllerEditor : Editor
       fpc.sprintBar = (Image)EditorGUILayout.ObjectField(fpc.sprintBar, typeof(Image), true);
       EditorGUILayout.EndHorizontal();
 
-
       EditorGUILayout.BeginHorizontal();
       fpc.sprintBarWidthPercent = EditorGUILayout.Slider(new GUIContent("Bar Width", "Determines the width of the sprint bar."), fpc.sprintBarWidthPercent, .1f, .5f);
       EditorGUILayout.EndHorizontal();
@@ -802,8 +897,7 @@ public class FirstPersonControllerEditor : Editor
     GUI.enabled = fpc.enableDash;
     fpc.unlimitedDash = EditorGUILayout.ToggleLeft(new GUIContent("Unlimited Dash", "Determines if 'Dash Duration' is enabled. Turning this on will allow for unlimited dash."), fpc.unlimitedDash);
     fpc.dashKey = (KeyCode)EditorGUILayout.EnumPopup(new GUIContent("Dash Key", "Determines what key is used to dash."), fpc.dashKey);
-    fpc.dashDistance = EditorGUILayout.Slider(new GUIContent("Dash Distance", "Determines how far the player will move when dashing."), fpc.dashDistance, fpc.walkSpeed, 99999f);
-
+    fpc.dashForce = EditorGUILayout.Slider(new GUIContent("Dash Force", "Determines how far the player will move when dashing."), fpc.dashForce, 0.1f, 10f);
 
     //GUI.enabled = !fpc.unlimitedDash;
     fpc.dashDuration = EditorGUILayout.Slider(new GUIContent("Dash Duration", "Determines how long the player can dash while unlimited dash is disabled."), fpc.dashDuration, 0.1f, 20f);
@@ -833,7 +927,6 @@ public class FirstPersonControllerEditor : Editor
       EditorGUILayout.PrefixLabel(new GUIContent("Bar", "Object to be used as dash bar foreground."));
       fpc.dashBar = (Image)EditorGUILayout.ObjectField(fpc.dashBar, typeof(Image), true);
       EditorGUILayout.EndHorizontal();
-
 
       EditorGUILayout.BeginHorizontal();
       fpc.dashBarWidthPercent = EditorGUILayout.Slider(new GUIContent("Bar Width", "Determines the width of the dash bar."), fpc.dashBarWidthPercent, .1f, .5f);
@@ -875,7 +968,6 @@ public class FirstPersonControllerEditor : Editor
     EditorGUILayout.Space();
 
     fpc.enableHeadBob = EditorGUILayout.ToggleLeft(new GUIContent("Enable Head Bob", "Determines if the camera will bob while the player is walking."), fpc.enableHeadBob);
-
 
     GUI.enabled = fpc.enableHeadBob;
     fpc.joint = (Transform)EditorGUILayout.ObjectField(new GUIContent("Camera Joint", "Joint object position is moved while head bob is active."), fpc.joint, typeof(Transform), true);
