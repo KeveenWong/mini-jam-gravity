@@ -112,7 +112,6 @@ public class FirstPersonController : MonoBehaviour
   public float dashFOVStepTime = 10f;
 
   // Dash Bar
-
   public bool useDashBar = true;
   public bool hideDashBarWhenFull = true;
   public Image dashBarBG;
@@ -122,19 +121,12 @@ public class FirstPersonController : MonoBehaviour
 
   // Internal Variables for Dash Bar 
   private CanvasGroup dashBarCG;
-
   private bool isDashing = false;
-
   private float dashRemaining;
-
   private float dashBarWidth;
-
   private float dashBarHeight;
-
   private bool isDashCooldown = false;
-
   private float dashCooldownReset;
-
   private bool wantsToDash = false;
   private Vector3 dashMoveDirection;
 
@@ -176,6 +168,9 @@ public class FirstPersonController : MonoBehaviour
   [SerializeField] ParticleSystem rightDashParticleSystem;
 
   #endregion
+
+  [Header("Interaction")]
+  public bool isInteracting = false;
 
   private void Awake()
   {
@@ -331,6 +326,8 @@ public class FirstPersonController : MonoBehaviour
       ResetPosition();
     }
 
+    if (isInteracting) return; // Skip movement and camera updates if interacting with UI
+
     #region Camera
 
     // Control camera movement
@@ -461,8 +458,8 @@ public class FirstPersonController : MonoBehaviour
         float dashProgress = (Time.time - dashStartTime) / dashDuration;
         if (dashProgress < 1f)
         {
-          // Apply force in dash direction
-          rb.AddForce(dashDirection * dashForce, ForceMode.Impulse);
+          // Apply velocity change instead of impulse force for more consistent dash
+          rb.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
           playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, dashFOV, dashFOVStepTime * Time.deltaTime);
         }
         else
