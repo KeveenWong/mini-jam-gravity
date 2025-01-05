@@ -546,7 +546,18 @@ public class FirstPersonController : MonoBehaviour
 
         // Calculate dash positions using the direction from Update
         dashStartPosition = transform.position;
-        dashEndPosition = dashStartPosition + (dashMoveDirection * dashDistance);
+        // Raycast to check for obstacles in dash path
+        RaycastHit hit;
+        if (Physics.Raycast(dashStartPosition, dashMoveDirection, out hit, dashDistance))
+        {
+          // If we hit something, set the end position slightly before the hit point
+          dashEndPosition = hit.point - (dashMoveDirection * 0.5f);
+        }
+        else
+        {
+          // If we didn't hit anything, use the full dash distance
+          dashEndPosition = dashStartPosition + (dashMoveDirection * dashDistance);
+        }
 
         // Zero out vertical velocity to prevent floating
         Vector3 currentVelocity = rb.linearVelocity;
@@ -604,8 +615,8 @@ public class FirstPersonController : MonoBehaviour
         Vector3 velocityChange = (targetVelocity - velocity);
         velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
         velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-        velocityChange.y = 0;
-
+        // velocityChange.y = 0;
+        Debug.Log("velocityChange.y: " + velocityChange.y);
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
       }
     }
