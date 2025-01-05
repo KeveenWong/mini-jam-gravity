@@ -3,6 +3,7 @@
 // CHANGES || version VERSION
 //
 // "Enable/Disable Headbob, Changed look rotations - should result in reduced camera jitters" || version 1.0.1
+// "Added first-person arms setup and movement" || version 1.0.2
 
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ using System.Net;
 public class FirstPersonController : MonoBehaviour
 {
   private Rigidbody rb;
+  private Animator animator; // Reference to the animator component
 
   #region Camera Movement Variables
 
@@ -169,8 +171,25 @@ public class FirstPersonController : MonoBehaviour
 
   #endregion
 
+  [Header("Animation")]
+  public GameObject playerModel; // Reference to the player model with animations
+  public Transform armsHolder; // Parent object for the arms model
+  public float armsBobAmount = 0.05f; // How much the arms move up/down while walking
+  public float armsSwayAmount = 0.1f; // How much the arms sway left/right with mouse movement
+  public float armsSwaySpeed = 5f; // How fast the arms return to center
+  public float walkBobSpeed = 14f; // Speed of walking head bob
+  public float sprintBobSpeed = 18f; // Speed of sprinting head bob
+  public float animationBlendSpeed = 0.1f; // Smoothing for animations
+  public float movementThreshold = 0.1f; // Minimum movement to trigger running
+
   [Header("Interaction")]
   public bool isInteracting = false;
+
+  private Vector3 armsDefaultPos;
+  private Vector3 armsDefaultRot;
+  private float bobTimer = 0f;
+  private float lastMouseX = 0f;
+  private float currentArmsSway = 0f;
 
   private void Awake()
   {
@@ -202,6 +221,13 @@ public class FirstPersonController : MonoBehaviour
 
     // Initial position for resetting on death
     initialPosition = transform.position;
+
+    // Store default arms position and rotation
+    if (armsHolder != null)
+    {
+      armsDefaultPos = armsHolder.localPosition;
+      armsDefaultRot = armsHolder.localEulerAngles;
+    }
   }
 
 
@@ -248,6 +274,12 @@ public class FirstPersonController : MonoBehaviour
     if (lockCursor)
     {
       Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    // Get the animator component from the player model
+    if (playerModel != null)
+    {
+      animator = playerModel.GetComponent<Animator>();
     }
 
     if (crosshair)
@@ -339,6 +371,20 @@ public class FirstPersonController : MonoBehaviour
     }
 
     if (isInteracting) return; // Skip movement and camera updates if interacting with UI
+
+    // Update animations based on movement
+    if (animator != null)
+    {
+      // Get movement speed
+      Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+      float movementSpeed = horizontalVelocity.magnitude;
+
+      // Set animator parameters
+      animator.SetBool("IsGrounded", isGrounded);
+      animator.SetBool("IsJumping", !isGrounded && rb.linearVelocity.y > 0);
+      animator.SetBool("IsFalling", !isGrounded && rb.linearVelocity.y < 0);
+      animator.SetFloat("Speed", movementSpeed, animationBlendSpeed, Time.deltaTime);
+    }
 
     #region Camera
 
@@ -539,6 +585,12 @@ public class FirstPersonController : MonoBehaviour
     if (enableHeadBob)
     {
       HeadBob();
+    }
+
+    // Update arms position and rotation
+    if (armsHolder != null)
+    {
+      UpdateArmsPosition();
     }
 
     // Check for dash input in Update
@@ -746,8 +798,41 @@ public class FirstPersonController : MonoBehaviour
 
     // forwardDashParticleSystem.Play();
   }
-}
 
+  private void UpdateArmsPosition()
+  {
+    // Calculate head bob
+    float bobSpeed = isSprinting ? sprintBobSpeed : walkBobSpeed;
+    Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+    
+    if (horizontalVelocity.magnitude > 0.1f && isGrounded)
+    {
+      bobTimer += Time.deltaTime * bobSpeed;
+      float bobOffset = Mathf.Sin(bobTimer) * armsBobAmount;
+      armsHolder.localPosition = armsDefaultPos + new Vector3(0, bobOffset, 0);
+    }
+    else
+    {
+      bobTimer = 0;
+      armsHolder.localPosition = Vector3.Lerp(armsHolder.localPosition, armsDefaultPos, Time.deltaTime * 5f);
+    }
+
+    // Calculate arms sway based on mouse movement
+    float mouseDelta = Input.GetAxis("Mouse X");
+    float targetSway = -mouseDelta * armsSwayAmount;
+    currentArmsSway = Mathf.Lerp(currentArmsSway, targetSway, Time.deltaTime * armsSwaySpeed);
+    
+    // Apply sway rotation
+    Vector3 targetRotation = armsDefaultRot + new Vector3(0, 0, currentArmsSway);
+    armsHolder.localEulerAngles = targetRotation;
+
+    // Return to center when no input
+    if (Mathf.Abs(mouseDelta) < 0.1f)
+    {
+      currentArmsSway = Mathf.Lerp(currentArmsSway, 0, Time.deltaTime * armsSwaySpeed);
+    }
+  }
+}
 
 
 // Custom Editor
@@ -771,7 +856,7 @@ public class FirstPersonControllerEditor : Editor
     EditorGUILayout.Space();
     GUILayout.Label("Modular First Person Controller", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 16 });
     GUILayout.Label("By Jess Case", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
-    GUILayout.Label("version 1.0.1", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
+    GUILayout.Label("version 1.0.2", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
     EditorGUILayout.Space();
 
     #region Camera Setup
@@ -983,6 +1068,25 @@ public class FirstPersonControllerEditor : Editor
     fpc.bobSpeed = EditorGUILayout.Slider(new GUIContent("Speed", "Determines how often a bob rotation is completed."), fpc.bobSpeed, 1, 20);
     fpc.bobAmount = EditorGUILayout.Vector3Field(new GUIContent("Bob Amount", "Determines the amount the joint moves in both directions on every axes."), fpc.bobAmount);
     GUI.enabled = true;
+
+    #endregion
+
+    #region Animation
+
+    EditorGUILayout.Space();
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Animation Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+    fpc.playerModel = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Player Model", "Reference to the player model with animations."), fpc.playerModel, typeof(GameObject), true);
+    fpc.armsHolder = (Transform)EditorGUILayout.ObjectField(new GUIContent("Arms Holder", "Parent object for the arms model."), fpc.armsHolder, typeof(Transform), true);
+    fpc.armsBobAmount = EditorGUILayout.Slider(new GUIContent("Arms Bob Amount", "How much the arms move up/down while walking."), fpc.armsBobAmount, 0.01f, 0.1f);
+    fpc.armsSwayAmount = EditorGUILayout.Slider(new GUIContent("Arms Sway Amount", "How much the arms sway left/right with mouse movement."), fpc.armsSwayAmount, 0.01f, 0.5f);
+    fpc.armsSwaySpeed = EditorGUILayout.Slider(new GUIContent("Arms Sway Speed", "How fast the arms return to center."), fpc.armsSwaySpeed, 1f, 10f);
+    fpc.walkBobSpeed = EditorGUILayout.Slider(new GUIContent("Walk Bob Speed", "Speed of walking head bob."), fpc.walkBobSpeed, 1f, 20f);
+    fpc.sprintBobSpeed = EditorGUILayout.Slider(new GUIContent("Sprint Bob Speed", "Speed of sprinting head bob."), fpc.sprintBobSpeed, 1f, 20f);
+    fpc.animationBlendSpeed = EditorGUILayout.Slider(new GUIContent("Animation Blend Speed", "Smoothing for animations."), fpc.animationBlendSpeed, 0.01f, 1f);
+    fpc.movementThreshold = EditorGUILayout.Slider(new GUIContent("Movement Threshold", "Minimum movement to trigger running."), fpc.movementThreshold, 0.01f, 1f);
 
     #endregion
 
