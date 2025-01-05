@@ -213,19 +213,31 @@ public class FirstPersonController : MonoBehaviour
 
 
   #region Collision
-  private void OnTriggerEnter(Collider other)
+  private void OnCollisionEnter(Collision collision)
   {
-    if (other.CompareTag("Obstacle"))
+    if (collision.gameObject.CompareTag("Obstacle"))
     {
-      Vector3 bounceDirection = (transform.position - other.transform.position).normalized;
-      // Debug.Log(bounceDirection);
-      // Preserve the horizontal direction while adding upward force
-      float upwardForce = 20f;
+      ContactPoint contact = collision.GetContact(0);
+      Vector3 bounceDirection = contact.normal;
+      
+      Vector3 currentVelocity = rb.linearVelocity;
+      float upwardForce = 8f;  
       float horizontalForce = 100f;
-        
-      // rb.linearVelocity = Vector3.zero; // Reset velocity
-      rb.AddForce(new Vector3(bounceDirection.x * horizontalForce, upwardForce, bounceDirection.z * horizontalForce), ForceMode.VelocityChange);
-      // ResetPosition();
+      
+      // Zero out velocity in collision direction
+      float dotProduct = Vector3.Dot(currentVelocity, bounceDirection);
+      if (dotProduct < 0)
+      {
+          rb.linearVelocity -= bounceDirection * dotProduct;
+      }
+      
+      // Apply bounce force with reduced vertical component
+      Vector3 bounceForce = new Vector3(
+          bounceDirection.x * horizontalForce,
+          bounceDirection.y * upwardForce + 5f,  
+          bounceDirection.z * horizontalForce
+      );
+      rb.AddForce(bounceForce, ForceMode.VelocityChange);
     }
   }
 
