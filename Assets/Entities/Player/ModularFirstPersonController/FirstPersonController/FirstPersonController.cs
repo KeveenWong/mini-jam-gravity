@@ -209,19 +209,32 @@ public class FirstPersonController : MonoBehaviour
     initialPosition = transform.position;
   }
 
+
   public void ResetPosition()
   {
     transform.position = initialPosition;
     rb.linearVelocity = Vector3.zero;
   }
 
+
+  #region Collision
   private void OnTriggerEnter(Collider other)
   {
     if (other.CompareTag("Obstacle"))
     {
-      ResetPosition();
+      Vector3 bounceDirection = (transform.position - other.transform.position).normalized;
+      // Debug.Log(bounceDirection);
+      // Preserve the horizontal direction while adding upward force
+      float upwardForce = 20f;
+      float horizontalForce = 100f;
+        
+      // rb.linearVelocity = Vector3.zero; // Reset velocity
+      rb.AddForce(new Vector3(bounceDirection.x * horizontalForce, upwardForce, bounceDirection.z * horizontalForce), ForceMode.VelocityChange);
+      // ResetPosition();
     }
   }
+
+  #endregion
 
   void Start()
   {
