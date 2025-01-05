@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -167,8 +169,21 @@ public class FirstPersonController : MonoBehaviour
 
   #endregion
 
+  #region Particles
+  [SerializeField] ParticleSystem forwardDashParticleSystem;
+  [SerializeField] ParticleSystem backwardDashParticleSystem;
+  [SerializeField] ParticleSystem leftDashParticleSystem;
+  [SerializeField] ParticleSystem rightDashParticleSystem;
+
+  #endregion
+
   private void Awake()
   {
+    forwardDashParticleSystem = GameObject.Find("ForwardDashParticles").GetComponent<ParticleSystem>();
+    backwardDashParticleSystem = GameObject.Find("BackwardDashParticles").GetComponent<ParticleSystem>();
+    leftDashParticleSystem = GameObject.Find("LeftDashParticles").GetComponent<ParticleSystem>();
+    rightDashParticleSystem = GameObject.Find("RightDashParticles").GetComponent<ParticleSystem>();
+
     rb = GetComponent<Rigidbody>();
 
     crosshairObject = GetComponentInChildren<Image>();
@@ -508,7 +523,7 @@ public class FirstPersonController : MonoBehaviour
     if (enableDash && Input.GetKeyDown(dashKey) && !isDashing)
     {
       Debug.Log($"Dash key pressed - Cooldown: {isDashCooldown}, Remaining: {dashRemaining}, Can Dash: {dashRemaining > 0f && !isDashCooldown}");
-      
+
       if (dashRemaining > 0f && !isDashCooldown)
       {
         wantsToDash = true;
@@ -545,6 +560,9 @@ public class FirstPersonController : MonoBehaviour
 
         // Calculate dash positions using the direction from Update
         dashDirection = dashMoveDirection;
+
+        // Play dash particles
+        PlayDashParticles();
 
         // Drain dash remaining
         if (!unlimitedDash)
@@ -657,6 +675,54 @@ public class FirstPersonController : MonoBehaviour
       timer = 0;
       joint.localPosition = new Vector3(Mathf.Lerp(joint.localPosition.x, jointOriginalPos.x, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.y, jointOriginalPos.y, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.z, jointOriginalPos.z, Time.deltaTime * bobSpeed));
     }
+  }
+
+  private void PlayDashParticles()
+  {
+    // Vector3 inputVector = dashMoveDirection;
+    // Debug.Log(Input.GetKey());
+    // Determine the direction of the dash and play the appropriate particle system
+    float verticalInput = Input.GetAxis("Vertical");
+    float horizontalInput = Input.GetAxis("Horizontal");
+
+    if (verticalInput > 0) {
+      forwardDashParticleSystem.Play();
+      Debug.Log("Forward Dash");
+    } else if (verticalInput < 0) {
+      backwardDashParticleSystem.Play();
+      Debug.Log("Backward Dash");
+    } else if (horizontalInput < 0) {
+      leftDashParticleSystem.Play();
+    } else if (horizontalInput > 0) {
+      rightDashParticleSystem.Play();
+    }
+
+    // // if (inputVector.z > 0 && Mathf.Abs(inputVector.x) <= inputVector.z) // Forward dash
+    // if (Input.GetKey(KeyCode.W) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+    // {
+    //   forwardDashParticleSystem.Play();
+    //   return;
+    // }
+    // // if (inputVector.z < 0 && Mathf.Abs(inputVector.x) <= inputVector.z) // Backward dash
+    // if (Input.GetKey(KeyCode.S) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+    // {
+    //   backwardDashParticleSystem.Play();
+    //   return;
+    // }
+    // // if (inputVector.x > 0) // Right dash
+    // if (Input.GetKey(KeyCode.D) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+    // {
+    //   rightDashParticleSystem.Play();
+    //   return;
+    // }
+    // // if (inputVector.x < 0) // Left dash
+    // if (Input.GetKey(KeyCode.A) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+    // {
+    //   leftDashParticleSystem.Play();
+    //   return;
+    // }
+
+    // forwardDashParticleSystem.Play();
   }
 }
 
