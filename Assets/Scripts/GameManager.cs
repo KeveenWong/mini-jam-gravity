@@ -42,8 +42,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int GetScore()
+    public int GetCurrency()
     {
         return currency;
+    }
+
+    public void SpendCurrency(int amount)
+    {
+        currency -= amount;
+        UpdateScoreDisplay();
     }
 }
