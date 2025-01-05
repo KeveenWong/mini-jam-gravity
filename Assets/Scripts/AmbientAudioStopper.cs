@@ -28,16 +28,16 @@ public class AmbientAudioStopper : MonoBehaviour
         if (other.CompareTag("Player") && ambientAudioSource != null)
         {
             // Stop the ambient audio
-            ambientAudioSource.Stop();
+            // ambientAudioSource.Stop();
             
             // You could also fade it out instead of stopping it immediately
-            // StartCoroutine(FadeOutAudio());
+            StartCoroutine(FadeOutAudio());
         }
     }
 
     // Optional: If you want to fade out the audio instead of stopping it immediately,
     // uncomment this coroutine and call it instead of ambientAudioSource.Stop()
-    /*
+    
     private System.Collections.IEnumerator FadeOutAudio()
     {
         float startVolume = ambientAudioSource.volume;
@@ -55,5 +55,4 @@ public class AmbientAudioStopper : MonoBehaviour
         ambientAudioSource.volume = 0f;
         ambientAudioSource.Stop();
     }
-    */
 }
