@@ -313,7 +313,7 @@ MonoBehaviour:
   enableDash: 1
   unlimitedDash: 0
   dashKey: 304
-  dashDistance: 8
+  dashForce: 2
   dashDuration: 0.2
   dashCooldown: 1
   dashFOV: 106
@@ -331,6 +331,10 @@ MonoBehaviour:
   joint: {fileID: 4459864851508666808}
   bobSpeed: 10
   bobAmount: {x: 0, y: 0.1, z: 0}
+  forwardDashParticleSystem: {fileID: 0}
+  backwardDashParticleSystem: {fileID: 0}
+  leftDashParticleSystem: {fileID: 0}
+  rightDashParticleSystem: {fileID: 0}
 --- !u!1 &4459864850190357393
 GameObject:
   m_ObjectHideFlags: 0
