@@ -60,7 +60,7 @@ public class FirstPersonController : MonoBehaviour
 
   #region Movement Variables
 
-  public bool playerCanMove = true;
+  public bool playerCanMove = false;
   public float walkSpeed = 5f;
   public float maxVelocityChange = 10f;
   private Vector3 initialPosition;
@@ -567,7 +567,7 @@ public class FirstPersonController : MonoBehaviour
   {
     #region Movement
 
-    if (playerCanMove)
+    if (!playerCanMove) return;
     {
       // Calculate how fast we should be moving
       Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
