@@ -26866,6 +26866,106 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4781277628412113339, guid: 92fb15add50f5df4ea5f2979be8a1acb, type: 3}
+--- !u!1001 &574689869
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 885095230}
+    m_Modifications:
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 171.60004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 171.60002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 171.60002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.8628845
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -86.631836
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 33.42592
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.9999692
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.007853894
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395013304543972153, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      propertyPath: m_Name
+      value: GoldCoin (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3395013304543972153, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 574689872}
+  m_SourcePrefab: {fileID: 100100000, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+--- !u!4 &574689870 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+  m_PrefabInstance: {fileID: 574689869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &574689871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3395013304543972153, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
+  m_PrefabInstance: {fileID: 574689869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &574689872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574689871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!43 &582479203
 Mesh:
   m_ObjectHideFlags: 0
@@ -38524,6 +38624,7 @@ Transform:
   m_Children:
   - {fileID: 2101772}
   - {fileID: 469919957}
+  - {fileID: 574689870}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &885187677
