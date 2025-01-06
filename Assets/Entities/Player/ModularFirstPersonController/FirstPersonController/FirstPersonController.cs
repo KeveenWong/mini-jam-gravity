@@ -4,6 +4,10 @@
 //
 // "Enable/Disable Headbob, Changed look rotations - should result in reduced camera jitters" || version 1.0.1
 // "Added first-person arms setup and movement" || version 1.0.2
+// "Updated zoom functionality to only work when binoculars are purchased" || version 1.0.3
+// "Added dash cooldown reduction based on purchased upgrades" || version 1.0.4
+// "Updated FirstPersonController to use global dash cooldown" || version 1.0.5
+// "Added static instance and removed GameSettings references" || version 1.0.6
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +15,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-
+// Custom Editor
 #if UNITY_EDITOR
 using UnityEditor;
 using System.Net;
@@ -19,6 +23,19 @@ using System.Net;
 
 public class FirstPersonController : MonoBehaviour
 {
+  private static FirstPersonController instance;
+  public static FirstPersonController Instance
+  {
+    get
+    {
+      if (instance == null)
+      {
+        instance = FindObjectOfType<FirstPersonController>();
+      }
+      return instance;
+    }
+  }
+
   private Rigidbody rb;
   private Animator animator; // Reference to the animator component
 
@@ -228,15 +245,26 @@ public class FirstPersonController : MonoBehaviour
       armsDefaultPos = armsHolder.localPosition;
       armsDefaultRot = armsHolder.localEulerAngles;
     }
+
+    if (instance != null && instance != this)
+    {
+      Destroy(gameObject);
+      return;
+    }
+    instance = this;
   }
 
+  public void ReduceDashCooldown(float reduction)
+  {
+    dashCooldown = Mathf.Max(dashCooldown - reduction, 0.1f);
+    dashCooldownReset = dashCooldown; // Update the reset value too
+  }
 
   public void ResetPosition()
   {
     transform.position = initialPosition;
     rb.linearVelocity = Vector3.zero;
   }
-
 
   #region Collision
   private void OnCollisionEnter(Collision collision)
@@ -291,10 +319,6 @@ public class FirstPersonController : MonoBehaviour
     {
       crosshairObject.gameObject.SetActive(false);
     }
-
-    // Set the initial pitch angle
-    pitch = initialPitch;
-    playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
 
     #region Sprint Bar
 
@@ -358,6 +382,8 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    // Initialize dash settings
+    dashCooldownReset = dashCooldown;
   }
 
   float camRotation;
@@ -414,42 +440,41 @@ public class FirstPersonController : MonoBehaviour
 
     if (enableZoom)
     {
-      // Changes isZoomed when key is pressed
-      // Behavior for toogle zoom
-      if (Input.GetKeyDown(zoomKey) && !holdToZoom && !isSprinting)
+      // Only allow zoom if player has purchased binoculars
+      if (PlayerInventory.Instance.HasItem("Binoculars"))
       {
-        if (!isZoomed)
+        if (Input.GetKeyDown(zoomKey) && !holdToZoom && !isSprinting)
         {
-          isZoomed = true;
+          if (!isZoomed)
+          {
+            isZoomed = true;
+          }
+          else
+          {
+            isZoomed = false;
+          }
         }
-        else
-        {
-          isZoomed = false;
-        }
-      }
 
-      // Changes isZoomed when key is pressed
-      // Behavior for hold to zoom
-      if (holdToZoom && !isSprinting)
-      {
-        if (Input.GetKeyDown(zoomKey))
+        if (holdToZoom && !isSprinting)
         {
-          isZoomed = true;
+          if (Input.GetKey(zoomKey))
+          {
+            isZoomed = true;
+          }
+          else
+          {
+            isZoomed = false;
+          }
         }
-        else if (Input.GetKeyUp(zoomKey))
-        {
-          isZoomed = false;
-        }
-      }
 
-      // Lerps camera.fieldOfView to allow for a smooth transistion
-      if (isZoomed)
-      {
-        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, zoomFOV, zoomStepTime * Time.deltaTime);
-      }
-      else if (!isZoomed && !isSprinting)
-      {
-        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, zoomStepTime * Time.deltaTime);
+        if (isZoomed)
+        {
+          playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, zoomFOV, zoomStepTime * Time.deltaTime);
+        }
+        else if (!isZoomed && !isSprinting)
+        {
+          playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, zoomStepTime * Time.deltaTime);
+        }
       }
     }
 
@@ -511,6 +536,25 @@ public class FirstPersonController : MonoBehaviour
 
     if (enableDash)
     {
+      if (Input.GetKeyDown(dashKey) && !isDashing && !isSprintCooldown && !isDashCooldown)
+      {
+        dashCooldown = dashCooldownReset; // Use the reset value
+        if (dashRemaining > 0f && !isDashCooldown)
+        {
+          wantsToDash = true;
+          // Calculate dash direction here so it matches the exact moment of input
+          dashMoveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+          if (dashMoveDirection.magnitude < 0.1f)
+          {
+            dashMoveDirection = transform.forward;
+          }
+          else
+          {
+            dashMoveDirection = transform.TransformDirection(dashMoveDirection);
+          }
+        }
+      }
+
       if (isDashing)
       {
         float dashProgress = (Time.time - dashStartTime) / dashDuration;
@@ -593,26 +637,6 @@ public class FirstPersonController : MonoBehaviour
       UpdateArmsPosition();
     }
 
-    // Check for dash input in Update
-    if (enableDash && Input.GetKeyDown(dashKey) && !isDashing)
-    {
-      Debug.Log($"Dash key pressed - Cooldown: {isDashCooldown}, Remaining: {dashRemaining}, Can Dash: {dashRemaining > 0f && !isDashCooldown}");
-
-      if (dashRemaining > 0f && !isDashCooldown)
-      {
-        wantsToDash = true;
-        // Calculate dash direction here so it matches the exact moment of input
-        dashMoveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        if (dashMoveDirection.magnitude < 0.1f)
-        {
-          dashMoveDirection = transform.forward;
-        }
-        else
-        {
-          dashMoveDirection = transform.TransformDirection(dashMoveDirection);
-        }
-      }
-    }
   }
 
   void FixedUpdate()
@@ -856,7 +880,7 @@ public class FirstPersonControllerEditor : Editor
     EditorGUILayout.Space();
     GUILayout.Label("Modular First Person Controller", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 16 });
     GUILayout.Label("By Jess Case", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
-    GUILayout.Label("version 1.0.2", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
+    GUILayout.Label("version 1.0.6", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
     EditorGUILayout.Space();
 
     #region Camera Setup
