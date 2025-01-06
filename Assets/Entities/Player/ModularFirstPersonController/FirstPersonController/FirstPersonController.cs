@@ -41,7 +41,7 @@ public class FirstPersonController : MonoBehaviour
   private float yaw = 0.0f;
   private float pitch = 0.0f;
 
-  public float initialPitch = -90f; // Add this line to define the initial pitch angle
+  public float initialPitch = 0f; // Add this line to define the initial pitch angle
 
   private Image crosshairObject;
 
@@ -61,7 +61,7 @@ public class FirstPersonController : MonoBehaviour
 
   #region Movement Variables
 
-  public bool playerCanMove = true;
+  public bool playerCanMove = false;
   public float walkSpeed = 5f;
   public float maxVelocityChange = 10f;
   private Vector3 initialPosition;
@@ -309,8 +309,8 @@ public class FirstPersonController : MonoBehaviour
     }
 
     // Set the initial pitch angle
-    pitch = initialPitch;
-    playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+    // pitch = initialPitch;
+    // playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
 
     #region Sprint Bar
 
@@ -615,7 +615,7 @@ public class FirstPersonController : MonoBehaviour
   {
     #region Movement
 
-    if (playerCanMove)
+    if (!playerCanMove) return;
     {
       // Calculate how fast we should be moving
       Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
