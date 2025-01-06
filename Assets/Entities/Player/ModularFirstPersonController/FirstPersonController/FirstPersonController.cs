@@ -318,6 +318,9 @@ public class FirstPersonController : MonoBehaviour
   {
     transform.position = initialPosition;
     rb.linearVelocity = Vector3.zero;
+    rb.angularVelocity = Vector3.zero;
+    rb.Sleep(); // This ensures the rigidbody is completely at rest
+    rb.WakeUp(); // Wake it up to respond to new forces
   }
 
 
