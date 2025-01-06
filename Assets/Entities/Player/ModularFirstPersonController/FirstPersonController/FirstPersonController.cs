@@ -412,7 +412,8 @@ public class FirstPersonController : MonoBehaviour
     FreezeScene();
     
     victoryScreenUI.SetActive(true);
-    
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
     Debug.Log("Victory!");
   }
 
@@ -436,7 +437,7 @@ public class FirstPersonController : MonoBehaviour
   public void Respawn()
   {
     UnfreezeScene();
-    
+    victoryScreenUI.SetActive(false);
     // Hide the death screen UI
     if (deathScreenUI != null)
     {
