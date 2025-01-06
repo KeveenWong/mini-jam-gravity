@@ -185,6 +185,9 @@ public class FirstPersonController : MonoBehaviour
   public int lives = 1;
   public int maxLives = 1;
   public HeartDisplay heartDisplay;
+  public GameObject deathScreenUI;
+  public GameObject victoryScreenUI;// Assign the Canvas GameObject in the Inspector
+  public Transform respawnPoint;  // Assign a spawn point in the scene
 
   public void IncreaseMaxLives()
   {
@@ -272,7 +275,9 @@ public class FirstPersonController : MonoBehaviour
             collisionAudioSource = gameObject.AddComponent<AudioSource>();
         }
     }
-
+    deathScreenUI.SetActive(false);
+    victoryScreenUI.SetActive(false);
+    
     if (!unlimitedSprint)
     {
       sprintRemaining = sprintDuration;
@@ -314,6 +319,7 @@ public class FirstPersonController : MonoBehaviour
     transform.position = initialPosition;
     rb.linearVelocity = Vector3.zero;
   }
+
 
   #region Collision
   private void OnCollisionEnter(Collision collision)
@@ -364,11 +370,90 @@ public class FirstPersonController : MonoBehaviour
       if (lives <= 0)
       {
         Debug.Log("Game Over");
-        ResetPosition();
-        lives = maxLives;
-        heartDisplay.UpdateHearts(lives);
+        TriggerDeath();
       }
     }
+  }
+  
+  public void TriggerDeath()
+  {
+    // Freeze the scene
+    FreezeScene();
+
+    // Show the death screen UI
+    if (deathScreenUI != null)
+    {
+      deathScreenUI.SetActive(true);
+    }
+
+    // Unlock the cursor for UI interaction
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
+
+    Debug.Log("Player has died!");
+  }
+  
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject.CompareTag("Final"))
+    {
+      TriggerVictory();
+    }
+  }
+  
+  private void TriggerVictory()
+  {
+    // Freeze the scene
+    FreezeScene();
+    
+    victoryScreenUI.SetActive(true);
+    
+
+    Debug.Log("Victory!");
+  }
+
+  private void FreezeScene()
+  {
+    // Freeze time
+    Time.timeScale = 0f;
+    
+      playerCanMove = false;
+      cameraCanMove = false;
+  }
+  private void UnfreezeScene()
+  {
+    // Unfreeze time
+    Time.timeScale = 1f;
+
+    playerCanMove = true;
+    cameraCanMove = true;
+  }
+
+  public void Respawn()
+  {
+    UnfreezeScene();
+    
+    // Hide the death screen UI
+    if (deathScreenUI != null)
+    {
+      deathScreenUI.SetActive(false);
+    }
+
+    
+    ResetPosition();
+    
+    lives = maxLives;
+    heartDisplay.UpdateHearts(lives);
+    Cursor.lockState = CursorLockMode.Locked;
+    Cursor.visible = false;
+
+    Debug.Log("Player has respawned!");
+  }
+
+  public void QuitGame()
+  {
+    Debug.Log("Quit Game");
+    Application.Quit();
   }
 
   #endregion
@@ -1249,6 +1334,26 @@ public class FirstPersonControllerEditor : Editor
     fpc.animationBlendSpeed = EditorGUILayout.Slider(new GUIContent("Animation Blend Speed", "Smoothing for animations."), fpc.animationBlendSpeed, 0.01f, 1f);
     fpc.movementThreshold = EditorGUILayout.Slider(new GUIContent("Movement Threshold", "Minimum movement to trigger running."), fpc.movementThreshold, 0.01f, 1f);
 
+    #endregion
+
+    #region deathScreen
+
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Death Screen UI", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+    fpc.deathScreenUI = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Death Screen UI", "The UI Canvas that appears when the player dies."), fpc.deathScreenUI, typeof(GameObject), true);
+    EditorGUILayout.Space();
+    
+    #endregion
+    
+    #region victoryScreen
+
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Victory Screen UI", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+    fpc.victoryScreenUI = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Victory Screen UI", "The UI Canvas that appears when the player wins."), fpc.victoryScreenUI, typeof(GameObject), true);
+    EditorGUILayout.Space();
+    
     #endregion
 
     //Sets any changes from the prefab
