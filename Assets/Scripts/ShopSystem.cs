@@ -17,6 +17,11 @@ public class ShopSystem : MonoBehaviour
     [Header("Interaction Settings")]
     public float interactionDistance = 3f;
     public KeyCode interactionKey = KeyCode.E;
+    
+    [Header("Audio")]
+    public AudioSource audioSource;  // Reference to the AudioSource component
+    public AudioClip purchaseSound;  // Sound to play when buying items
+    public AudioClip shopCloseSound; // Sound to play when closing the shop
 
     private bool isPlayerInRange = false;
     private bool isShopOpen = false;
@@ -26,6 +31,19 @@ public class ShopSystem : MonoBehaviour
         // Ensure UI elements start hidden
         if (interactionPrompt != null) interactionPrompt.SetActive(false);
         if (shopMenu != null) shopMenu.SetActive(false);
+
+        // Make sure we have an AudioSource component
+        if (audioSource == null)
+        {
+            // If no AudioSource was assigned, try to get it from this GameObject
+            audioSource = GetComponent<AudioSource>();
+            
+            // If still null, add a new AudioSource component
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
         
         // Create shop items
         CreateShopItems();
@@ -134,6 +152,14 @@ public class ShopSystem : MonoBehaviour
                 }
             }
             
+
+            // Play purchase sound
+            if (audioSource != null && purchaseSound != null)
+            {
+                audioSource.PlayOneShot(purchaseSound);
+            }
+            
+
             Debug.Log($"Purchased {item.itemName}");
         }
         else
@@ -182,7 +208,13 @@ public class ShopSystem : MonoBehaviour
             {
                 UpdateCurrencyDisplay();  // Update currency when shop opens
             }
-            
+            else {
+                // Play shop close sound when the shop is being closed
+                if (audioSource != null && shopCloseSound != null)
+                {
+                    audioSource.PlayOneShot(shopCloseSound);
+                }
+            }
             // Handle cursor visibility
             Cursor.visible = isShopOpen;
             Cursor.lockState = isShopOpen ? CursorLockMode.None : CursorLockMode.Locked;
