@@ -123,7 +123,7 @@ public class FirstPersonController : MonoBehaviour
   public bool enableDash = true;
   public bool unlimitedDash = false;
   public KeyCode dashKey = KeyCode.LeftShift;
-  public float dashForce = 0.5f;
+  public float dashForce = 4f;
   public float dashDuration = 0.5f;
   private float dashStartTime;
   private Vector3 dashDirection;

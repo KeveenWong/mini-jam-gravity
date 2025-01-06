@@ -1,7 +1,15 @@
 fileFormatVersion: 2
 guid: 1771ce0f35a24ce4489430a6e46a04bf
+AssetOrigin:
+  serializedVersion: 1
+  productId: 281733
+  packageName: Rocks and Terrains Pack - Low Poly
+  packageVersion: 1.0.0
+  assetPath: Assets/HQP STUDIOS/Rocks and Terrains Pack - Low Poly/Models/Rocks/Square
+    Rocks/Snow Square Rocks/Square_Snow_Rock_28.fbx
+  uploadId: 672735
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects: {}
   materials:
@@ -16,8 +24,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -32,7 +38,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -40,6 +46,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -67,6 +74,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -99,16 +107,9 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 281733
-  packageName: Rocks and Terrains Pack - Low Poly
-  packageVersion: 1.0.0
-  assetPath: Assets/HQP STUDIOS/Rocks and Terrains Pack - Low Poly/Models/Rocks/Square
-    Rocks/Snow Square Rocks/Square_Snow_Rock_28.fbx
-  uploadId: 672735

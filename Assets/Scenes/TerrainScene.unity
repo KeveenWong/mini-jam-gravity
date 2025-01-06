@@ -559,6 +559,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1459,9 +1467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -1754,9 +1762,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -1774,15 +1782,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 254.44481
+      value: 257.9
       objectReference: {fileID: 0}
     - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4979.7427
+      value: 4979.31
       objectReference: {fileID: 0}
     - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 240.35
+      value: 238.57
       objectReference: {fileID: 0}
     - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6728,6 +6736,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a3b2b9b83de1aa340adb6b3d75c5907e, type: 2}
+    - target: {fileID: 6400000, guid: 4f025ccab8429664ea3422a254c221ca, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6782,9 +6794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -6980,6 +6992,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (52)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7247,6 +7267,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7760,6 +7788,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7792,9 +7828,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -8119,6 +8155,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13555,6 +13599,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14285,6 +14337,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14525,7 +14585,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -14628,6 +14688,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (69)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14974,9 +15042,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -15085,7 +15153,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1100, y: 504}
+  m_SizeDelta: {x: 2046, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &206516088
 MonoBehaviour:
@@ -15651,6 +15719,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15791,67 +15867,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2643173543783292932, guid: ff5ea9abf543a2a4283fd884a715c071, type: 3}
---- !u!1001 &231623880
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1818790407468953101, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: volume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 255.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4979.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 236.63
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3395013304543972153, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_Name
-      value: GoldCoin (2)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
 --- !u!1 &233447486 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4978890121609894341, guid: cc47579fdfca6564ba3993fde50cef1c, type: 3}
@@ -15983,9 +15998,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -16275,6 +16290,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16584,6 +16607,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16822,6 +16853,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16883,6 +16922,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (93)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17023,6 +17070,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17466,9 +17521,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -17829,6 +17884,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (71)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18079,9 +18142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -18334,7 +18397,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -18555,6 +18618,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18660,6 +18731,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 50c02f0fd54eb9f4f8869a398c63d3d0, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 50c02f0fd54eb9f4f8869a398c63d3d0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18687,9 +18766,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -18744,6 +18823,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (83)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25560,9 +25647,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -25588,9 +25675,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -25616,9 +25703,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -25853,9 +25940,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -26243,6 +26330,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (88)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26453,9 +26548,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -26668,6 +26763,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27846,9 +27949,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -28296,9 +28399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -28463,6 +28566,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (64)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29204,6 +29315,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (107)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29490,9 +29609,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -29545,9 +29664,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -29602,6 +29721,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30205,6 +30332,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a3b2b9b83de1aa340adb6b3d75c5907e, type: 2}
+    - target: {fileID: 6400000, guid: beb8ceccb376f684095ae1a93f088717, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: beb8ceccb376f684095ae1a93f088717, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30682,9 +30817,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -30941,6 +31076,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31189,6 +31332,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31288,9 +31439,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -31376,9 +31527,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -31545,9 +31696,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -31606,6 +31757,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32689,9 +32848,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -33304,6 +33463,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36850,6 +37017,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37074,9 +37249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -37566,6 +37741,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37756,9 +37939,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -37881,6 +38064,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (100)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38706,9 +38897,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -38764,6 +38955,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38791,9 +38990,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -38891,9 +39090,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -38953,6 +39152,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (103)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39082,6 +39289,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39606,9 +39821,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -39639,9 +39854,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -40004,9 +40219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -40178,9 +40393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -42309,9 +42524,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -42736,6 +42951,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (44)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43113,9 +43336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -43252,6 +43475,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (45)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43340,6 +43571,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43367,9 +43606,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -43427,9 +43666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -43789,9 +44028,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -43981,6 +44220,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: d9a37c1e81c2edd418eab77179043eb0, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: d9a37c1e81c2edd418eab77179043eb0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44073,6 +44320,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44670,6 +44925,7 @@ Transform:
   - {fileID: 1804009954}
   - {fileID: 1858449301}
   - {fileID: 1873324965}
+  - {fileID: 1831543674}
   - {fileID: 52631835}
   - {fileID: 1871307195}
   - {fileID: 2083488754}
@@ -46042,9 +46298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -46334,67 +46590,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3395013304543972153, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 991304367}
-  m_SourcePrefab: {fileID: 100100000, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
---- !u!1001 &933538648
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1818790407468953101, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: volume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 255.37946
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4978.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 235.69298
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3395013304543972153, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_Name
-      value: GoldCoin (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
 --- !u!1 &934392197 stripped
 GameObject:
@@ -46946,9 +47141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -47391,6 +47586,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: 5f0c6f2eeb60c374aad117bde2bd80a1, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 5f0c6f2eeb60c374aad117bde2bd80a1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47480,7 +47683,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1100, y: 504}
+  m_SizeDelta: {x: 2045, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977243644
 MonoBehaviour:
@@ -47718,9 +47921,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -47992,9 +48195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -48125,9 +48328,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -48153,9 +48356,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -49625,6 +49828,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49864,6 +50075,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (79)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49996,6 +50215,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: 08d02c187472d684096f88c67beb6890, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 08d02c187472d684096f88c67beb6890, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50309,6 +50536,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50544,9 +50779,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -51071,6 +51306,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (55)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51264,9 +51507,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -51700,6 +51943,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51732,67 +51983,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8915150858600179238, guid: 6228c1b039216554c88816aa01443e53, type: 3}
---- !u!1001 &1065889013
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1818790407468953101, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: volume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 255.17068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4978.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 234.62465
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3395013304543972153, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_Name
-      value: GoldCoin
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
 --- !u!1 &1068247695 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2268394519235157520, guid: bfa0480056e122842bc0b06019fb3b34, type: 3}
@@ -52221,9 +52411,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -52474,9 +52664,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -52535,6 +52725,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52657,6 +52855,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (105)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52925,6 +53131,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58486,9 +58700,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -58773,9 +58987,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -63665,6 +63879,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64317,6 +64539,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (67)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64416,9 +64646,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -64636,67 +64866,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3141266027737310876, guid: 25e3cba4b2f57754db5edbb72db006ed, type: 3}
   m_PrefabInstance: {fileID: 1200754169}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1201581119
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1818790407468953101, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: volume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 254.45845
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4979
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 236.63834
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1919569483558311119, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3395013304543972153, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
-      propertyPath: m_Name
-      value: GoldCoin (3)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
 --- !u!1 &1202092537 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5972650500178605120, guid: 388b740f7906b1b4ab4bb69f4a0b7cb3, type: 3}
@@ -65012,9 +65181,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -65579,6 +65748,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: 63d2b0fa33464ad49bcded49a4303d23, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 63d2b0fa33464ad49bcded49a4303d23, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -65822,7 +65999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: dashForce
-      value: 5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: dashSound
@@ -66346,6 +66523,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: 5ccad72751160e341ad0b43ec43a620a, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -66577,6 +66758,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -66976,6 +67165,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (81)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67306,6 +67503,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67362,6 +67567,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (95)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -67560,6 +67773,76 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1001 &1304083396
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 885095230}
+    m_Modifications:
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 171.60005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.6845048
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.045295592
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.72605616
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.047370367
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 172.484
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -86.62201
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180.053
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: m_Name
+      value: GoldCoin (4) Variant (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 2413448298799982633, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1260e49429d6d84428951353c5a01315, type: 3}
 --- !u!1 &1304588776 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6501826406694238128, guid: df6e0d5705c11244c8b08313c0fe392b, type: 3}
@@ -67855,6 +68138,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67967,6 +68258,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock Type1 03
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9d775005a3ddca74096b475e99b14c13, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9d775005a3ddca74096b475e99b14c13, type: 3}
       propertyPath: m_LocalScale.x
       value: 112.06086
@@ -68023,6 +68318,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: 9d775005a3ddca74096b475e99b14c13, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 9d775005a3ddca74096b475e99b14c13, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -69046,9 +69349,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -69821,6 +70124,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -69848,9 +70159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -70006,6 +70317,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -70246,6 +70565,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -70442,9 +70769,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -72514,6 +72841,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -72578,9 +72913,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -72798,6 +73133,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -72866,6 +73209,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 50c02f0fd54eb9f4f8869a398c63d3d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 50c02f0fd54eb9f4f8869a398c63d3d0, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -73112,6 +73459,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -73258,6 +73613,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: 110d2d66b09076d4e88fb91dc58961ab, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 110d2d66b09076d4e88fb91dc58961ab, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -73357,9 +73720,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -73390,9 +73753,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -73769,6 +74132,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74035,6 +74406,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: 815ec0c049d4ec849bd4960c32e13ec2, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 815ec0c049d4ec849bd4960c32e13ec2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77378,6 +77757,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (91)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77672,6 +78059,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -80067,9 +80462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -80156,6 +80551,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -81665,6 +82068,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -81833,6 +82244,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85224,6 +85643,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -85499,9 +85926,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -85587,6 +86014,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85693,9 +86128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -86366,9 +86801,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -86461,6 +86896,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 976291045}
   m_SourcePrefab: {fileID: 100100000, guid: 9601afc16faef9147bd4d9886ac3f5c1, type: 3}
+--- !u!4 &1831543674 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2106514343445729492, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+  m_PrefabInstance: {fileID: 1304083396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1831954903 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3395013304543972153, guid: 58d81ddbf7c4d97409326f7f8224513b, type: 3}
@@ -86483,9 +86923,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -86743,6 +87183,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -88978,9 +89426,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -89168,6 +89616,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -89241,6 +89697,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: 63d2b0fa33464ad49bcded49a4303d23, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 63d2b0fa33464ad49bcded49a4303d23, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -89915,6 +90379,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -91266,9 +91738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -91506,9 +91978,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -91865,9 +92337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -92006,9 +92478,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -92143,6 +92615,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -94538,6 +95018,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (40)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95386,9 +95874,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -95443,6 +95931,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (57)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -95586,9 +96082,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -95782,6 +96278,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -96806,6 +97310,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -97087,6 +97599,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -97114,9 +97634,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -97202,6 +97722,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -97775,6 +98303,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: 63d2b0fa33464ad49bcded49a4303d23, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -101080,9 +101612,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -101238,6 +101770,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -101535,6 +102075,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (76)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -101874,9 +102422,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0.9150943, g: 0.849373, b: 0.12517802, a: 1}
-  outlineWidth: 10
+  outlineWidth: 5.9
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -102215,6 +102763,14 @@ PrefabInstance:
     - target: {fileID: 2920016430519078690, guid: 1260e49429d6d84428951353c5a01315, type: 3}
       propertyPath: m_Name
       value: GoldCoin (4) Variant (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -102700,6 +103256,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0060a88cd6252a146aeb6a9652d03869, type: 2}
+    - target: {fileID: 6400000, guid: f50da248aa3fb334ab1caff0974120bf, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: f50da248aa3fb334ab1caff0974120bf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -102834,6 +103398,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (59)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -102895,6 +103467,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4) Variant (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -102952,6 +103532,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldCoin (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829620390184652887, guid: 1260e49429d6d84428951353c5a01315, type: 3}
+      propertyPath: outlineWidth
+      value: 5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -102982,10 +103570,6 @@ SceneRoots:
   - {fileID: 176715754}
   - {fileID: 1810187177}
   - {fileID: 890643190}
-  - {fileID: 1065889013}
-  - {fileID: 933538648}
-  - {fileID: 231623880}
-  - {fileID: 1201581119}
   - {fileID: 50822575}
   - {fileID: 1448371077}
   - {fileID: 346769407}
