@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Random = UnityEngine.Random;
 
 
 #if UNITY_EDITOR
@@ -167,6 +168,18 @@ public class FirstPersonController : MonoBehaviour
   [SerializeField] ParticleSystem leftDashParticleSystem;
   [SerializeField] ParticleSystem rightDashParticleSystem;
 
+  [Header("Audio")]
+  [SerializeField] private AudioSource dashAudioSource;  // Reference to the AudioSource component
+  [SerializeField] private AudioClip dashSound;          // The dash sound effect to play
+  [SerializeField] [Range(0f, 1f)] private float dashVolume = 1f;  // Adjustable volume for dash sound
+
+  // Add these new fields for collision audio
+  [SerializeField] private AudioSource collisionAudioSource;  // Separate audio source for collision sounds
+  [SerializeField] private AudioClip obstacleCollisionSound;  // The sound to play when hitting obstacles
+  [SerializeField] [Range(0f, 1f)] private float collisionVolume = 1f;  // Collision sound volume
+  [SerializeField] [Range(0.5f, 1.5f)] private float collisionBasePitch = 1f;  // Base pitch for collision sounds
+  [SerializeField] [Range(0f, 0.5f)] private float collisionPitchVariation = 0.1f;  // Pitch variation for more natural sound
+
   #endregion
 
   [Header("Interaction")]
@@ -187,6 +200,26 @@ public class FirstPersonController : MonoBehaviour
     playerCamera.fieldOfView = fov;
     originalScale = transform.localScale;
     jointOriginalPos = joint.localPosition;
+
+    if (dashAudioSource == null)
+    {
+        dashAudioSource = GetComponent<AudioSource>();
+    }
+
+    // Add this new check for collision audio source
+    if (collisionAudioSource == null)
+    {
+        // Try to find a second audio source, or create one if needed
+        AudioSource[] sources = GetComponents<AudioSource>();
+        if (sources.Length > 1)
+        {
+            collisionAudioSource = sources[1];
+        }
+        else
+        {
+            collisionAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     if (!unlimitedSprint)
     {
@@ -217,6 +250,21 @@ public class FirstPersonController : MonoBehaviour
   {
     if (collision.gameObject.CompareTag("Obstacle"))
     {
+      
+      // Play collision sound with random pitch variation
+      if (collisionAudioSource != null && obstacleCollisionSound != null)
+      {
+          // Calculate random pitch based on collision force
+          float collisionForce = collision.relativeVelocity.magnitude;
+          float randomPitch = collisionBasePitch + Random.Range(-collisionPitchVariation, collisionPitchVariation);
+          
+          // Optionally adjust pitch based on collision force
+          randomPitch = Mathf.Clamp(randomPitch * (collisionForce / 10f), 0.5f, 1.5f);
+          
+          collisionAudioSource.pitch = randomPitch;
+          collisionAudioSource.PlayOneShot(obstacleCollisionSound, collisionVolume);
+      }
+
       ContactPoint contact = collision.GetContact(0);
       Vector3 bounceDirection = contact.normal;
       
@@ -701,6 +749,15 @@ public class FirstPersonController : MonoBehaviour
 
   private void PlayDashParticles()
   {
+
+
+    // Play the dash sound effect
+    if (dashAudioSource != null && dashSound != null)
+    {
+        dashAudioSource.PlayOneShot(dashSound, dashVolume);
+    }
+
+
     // Vector3 inputVector = dashMoveDirection;
     // Debug.Log(Input.GetKey());
     // Determine the direction of the dash and play the appropriate particle system
@@ -718,6 +775,7 @@ public class FirstPersonController : MonoBehaviour
     } else if (horizontalInput > 0) {
       rightDashParticleSystem.Play();
     }
+    
 
     // // if (inputVector.z > 0 && Mathf.Abs(inputVector.x) <= inputVector.z) // Forward dash
     // if (Input.GetKey(KeyCode.W) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
@@ -986,13 +1044,49 @@ public class FirstPersonControllerEditor : Editor
 
     #endregion
 
+    #region Audio Setup
+    EditorGUILayout.Space();
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Audio Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+    // Dash Sound Controls
+    SerializedProperty dashAudioSourceProp = SerFPC.FindProperty("dashAudioSource");
+    SerializedProperty dashSoundProp = SerFPC.FindProperty("dashSound");
+    SerializedProperty dashVolumeProp = SerFPC.FindProperty("dashVolume");
+
+    // Collision Sound Controls
+    SerializedProperty collisionAudioSourceProp = SerFPC.FindProperty("collisionAudioSource");
+    SerializedProperty collisionSoundProp = SerFPC.FindProperty("obstacleCollisionSound");
+    SerializedProperty collisionVolumeProp = SerFPC.FindProperty("collisionVolume");
+    SerializedProperty collisionBasePitchProp = SerFPC.FindProperty("collisionBasePitch");
+    SerializedProperty collisionPitchVariationProp = SerFPC.FindProperty("collisionPitchVariation");
+
+    GUILayout.Label("Dash Audio", EditorStyles.boldLabel);
+    EditorGUILayout.PropertyField(dashAudioSourceProp, new GUIContent("Dash Audio Source", "The Audio Source component that will play the dash sound."));
+    EditorGUILayout.PropertyField(dashSoundProp, new GUIContent("Dash Sound", "The sound effect that plays when dashing."));
+    EditorGUILayout.PropertyField(dashVolumeProp, new GUIContent("Dash Volume", "Volume of the dash sound effect (0-1)."));
+
+    EditorGUILayout.Space();
+
+    GUILayout.Label("Collision Audio", EditorStyles.boldLabel);
+    EditorGUILayout.PropertyField(collisionAudioSourceProp, new GUIContent("Collision Audio Source", "The Audio Source component that will play collision sounds."));
+    EditorGUILayout.PropertyField(collisionSoundProp, new GUIContent("Collision Sound", "The sound effect that plays when hitting obstacles."));
+    EditorGUILayout.PropertyField(collisionVolumeProp, new GUIContent("Collision Volume", "Volume of the collision sound effect (0-1)."));
+    EditorGUILayout.PropertyField(collisionBasePitchProp, new GUIContent("Base Pitch", "The center pitch for collision sounds (1 is normal pitch)"));
+    EditorGUILayout.PropertyField(collisionPitchVariationProp, new GUIContent("Pitch Variation", "How much the pitch can randomly vary up or down"));
+
+    EditorGUILayout.Space();
+    #endregion
+
     //Sets any changes from the prefab
     if (GUI.changed)
     {
-      EditorUtility.SetDirty(fpc);
-      Undo.RecordObject(fpc, "FPC Change");
-      SerFPC.ApplyModifiedProperties();
+        EditorUtility.SetDirty(fpc);
+        Undo.RecordObject(fpc, "FPC Change");
+        SerFPC.ApplyModifiedProperties();
     }
+
   }
 
 }
