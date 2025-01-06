@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     
     // Optional: Reference to UI Text to display score
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private GameObject title; // Reference to the 3D title text
+    [SerializeField] private GameObject title3DText; // Reference to the 3D title text
     [SerializeField] private GameObject instructions3DText; // Reference to the 3D instructions text
     
     private bool gameStarted = false;
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Ensure UI is visible at the start
-        if (title != null) title.SetActive(true);
+        if (title3DText != null) title3DText.SetActive(true);
         if (instructions3DText != null) instructions3DText.SetActive(true);
 
         // Freeze the entire scene
@@ -49,20 +49,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // private bool CheckInput()
+    // {
+    //     return Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) ||
+    //            Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D);
+    // }
+    
     private bool CheckInput()
     {
-        return Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) ||
-               Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D);
+        return Input.GetKeyDown(KeyCode.U);
     }
-    
-
 
     private void StartGame()
     {
         gameStarted = true;
 
         // Hide 3D UI elements
-        if (title != null) title.SetActive(false);
+        if (title3DText != null) title3DText.SetActive(false);
         if (instructions3DText != null) instructions3DText.SetActive(false);
 
         // Allow player movement
@@ -71,6 +74,9 @@ public class GameManager : MonoBehaviour
         {
             playerController.playerCanMove = true;
         }
+
+        UnfreezeScene();
+
     }
 
     private void FreezeScene()
@@ -98,6 +104,7 @@ public class GameManager : MonoBehaviour
             playerController.playerCanMove = true;
         }
     }
+
 
     public void AddScore(int amount)
     {
