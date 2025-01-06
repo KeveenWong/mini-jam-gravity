@@ -49,16 +49,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // private bool CheckInput()
-    // {
-    //     return Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) ||
-    //            Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D);
-    // }
-    
     private bool CheckInput()
     {
-        return Input.GetKeyDown(KeyCode.U);
+        return Input.GetKeyDown(KeyCode.W);
     }
+    
 
     private void StartGame()
     {
@@ -67,14 +62,7 @@ public class GameManager : MonoBehaviour
         // Hide 3D UI elements
         if (title3DText != null) title3DText.SetActive(false);
         if (instructions3DText != null) instructions3DText.SetActive(false);
-
-        // Allow player movement
-        var playerController = FindObjectOfType<FirstPersonController>();
-        if (playerController != null)
-        {
-            playerController.playerCanMove = true;
-        }
-
+        
         UnfreezeScene();
 
     }
@@ -89,6 +77,7 @@ public class GameManager : MonoBehaviour
         if (playerController != null)
         {
             playerController.playerCanMove = false;
+            playerController.cameraCanMove = false;
         }
     }
 
@@ -102,6 +91,7 @@ public class GameManager : MonoBehaviour
         if (playerController != null)
         {
             playerController.playerCanMove = true;
+            playerController.cameraCanMove = true;
         }
     }
 

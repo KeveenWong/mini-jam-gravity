@@ -40,7 +40,7 @@ public class FirstPersonController : MonoBehaviour
   private float yaw = 0.0f;
   private float pitch = 0.0f;
 
-  public float initialPitch = -90f; // Add this line to define the initial pitch angle
+  public float initialPitch = 0f; // Add this line to define the initial pitch angle
 
   private Image crosshairObject;
 
@@ -261,8 +261,8 @@ public class FirstPersonController : MonoBehaviour
     }
 
     // Set the initial pitch angle
-    pitch = initialPitch;
-    playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+    // pitch = initialPitch;
+    // playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
 
     #region Sprint Bar
 
