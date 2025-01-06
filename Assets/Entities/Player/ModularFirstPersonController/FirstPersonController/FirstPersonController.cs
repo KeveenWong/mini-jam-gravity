@@ -373,6 +373,11 @@ public class FirstPersonController : MonoBehaviour
         TriggerDeath();
       }
     }
+    
+    if (collision.gameObject.CompareTag("Final"))
+    {
+      TriggerVictory();
+    }
   }
   
   public void TriggerDeath()
@@ -408,7 +413,6 @@ public class FirstPersonController : MonoBehaviour
     
     victoryScreenUI.SetActive(true);
     
-
     Debug.Log("Victory!");
   }
 
