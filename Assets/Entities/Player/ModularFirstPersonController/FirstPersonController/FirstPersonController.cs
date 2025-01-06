@@ -182,13 +182,17 @@ public class FirstPersonController : MonoBehaviour
   #endregion
 
   #region Lives
-  public int lives = 3;
-  public int maxLives = 3;
-  // public Image[] hearts;
-  // public Sprite fullHeart;
-  // public Sprite emptyHeart;
+  public int lives = 1;
+  public int maxLives = 1;
   public HeartDisplay heartDisplay;
 
+  public void IncreaseMaxLives()
+  {
+    maxLives++;
+    lives = maxLives;
+    heartDisplay.InitializeHearts(maxLives);
+    heartDisplay.UpdateHearts(lives);
+  }
   #endregion
 
   #region Particles
@@ -850,13 +854,11 @@ public class FirstPersonController : MonoBehaviour
   private void PlayDashParticles()
   {
 
-
     // Play the dash sound effect
     if (dashAudioSource != null && dashSound != null)
     {
         dashAudioSource.PlayOneShot(dashSound, dashVolume);
     }
-
 
     // Vector3 inputVector = dashMoveDirection;
     // Debug.Log(Input.GetKey());
@@ -882,8 +884,6 @@ public class FirstPersonController : MonoBehaviour
     {
       rightDashParticleSystem.Play();
     }
-    
-
     // // if (inputVector.z > 0 && Mathf.Abs(inputVector.x) <= inputVector.z) // Forward dash
     // if (Input.GetKey(KeyCode.W) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
     // {
@@ -1023,7 +1023,6 @@ public class FirstPersonControllerEditor : Editor
     GUI.enabled = true;
 
     #endregion
-
     #endregion
 
     #region Movement Setup
