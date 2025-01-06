@@ -3,14 +3,20 @@
 // CHANGES || version VERSION
 //
 // "Enable/Disable Headbob, Changed look rotations - should result in reduced camera jitters" || version 1.0.1
+// "Added first-person arms setup and movement" || version 1.0.2
+// "Updated zoom functionality to only work when binoculars are purchased" || version 1.0.3
+// "Added dash cooldown reduction based on purchased upgrades" || version 1.0.4
+// "Updated FirstPersonController to use global dash cooldown" || version 1.0.5
+// "Added static instance and removed GameSettings references" || version 1.0.6
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Random = UnityEngine.Random;
 
-
+// Custom Editor
 #if UNITY_EDITOR
 using UnityEditor;
 using System.Net;
@@ -18,7 +24,21 @@ using System.Net;
 
 public class FirstPersonController : MonoBehaviour
 {
+  private static FirstPersonController instance;
+  public static FirstPersonController Instance
+  {
+    get
+    {
+      if (instance == null)
+      {
+        instance = FindObjectOfType<FirstPersonController>();
+      }
+      return instance;
+    }
+  }
+
   private Rigidbody rb;
+  private Animator animator; // Reference to the animator component
 
   #region Camera Movement Variables
 
@@ -161,16 +181,55 @@ public class FirstPersonController : MonoBehaviour
 
   #endregion
 
+  #region Lives
+  public int lives = 3;
+  public int maxLives = 3;
+  // public Image[] hearts;
+  // public Sprite fullHeart;
+  // public Sprite emptyHeart;
+  public HeartDisplay heartDisplay;
+
+  #endregion
+
   #region Particles
   [SerializeField] ParticleSystem forwardDashParticleSystem;
   [SerializeField] ParticleSystem backwardDashParticleSystem;
   [SerializeField] ParticleSystem leftDashParticleSystem;
   [SerializeField] ParticleSystem rightDashParticleSystem;
 
+  [Header("Audio")]
+  [SerializeField] private AudioSource dashAudioSource;  // Reference to the AudioSource component
+  [SerializeField] private AudioClip dashSound;          // The dash sound effect to play
+  [SerializeField] [Range(0f, 1f)] private float dashVolume = 1f;  // Adjustable volume for dash sound
+
+  // Add these new fields for collision audio
+  [SerializeField] private AudioSource collisionAudioSource;  // Separate audio source for collision sounds
+  [SerializeField] private AudioClip obstacleCollisionSound;  // The sound to play when hitting obstacles
+  [SerializeField] [Range(0f, 1f)] private float collisionVolume = 1f;  // Collision sound volume
+  [SerializeField] [Range(0.5f, 1.5f)] private float collisionBasePitch = 1f;  // Base pitch for collision sounds
+  [SerializeField] [Range(0f, 0.5f)] private float collisionPitchVariation = 0.1f;  // Pitch variation for more natural sound
+
   #endregion
+
+  [Header("Animation")]
+  public GameObject playerModel; // Reference to the player model with animations
+  public Transform armsHolder; // Parent object for the arms model
+  public float armsBobAmount = 0.05f; // How much the arms move up/down while walking
+  public float armsSwayAmount = 0.1f; // How much the arms sway left/right with mouse movement
+  public float armsSwaySpeed = 5f; // How fast the arms return to center
+  public float walkBobSpeed = 14f; // Speed of walking head bob
+  public float sprintBobSpeed = 18f; // Speed of sprinting head bob
+  public float animationBlendSpeed = 0.1f; // Smoothing for animations
+  public float movementThreshold = 0.1f; // Minimum movement to trigger running
 
   [Header("Interaction")]
   public bool isInteracting = false;
+
+  private Vector3 armsDefaultPos;
+  private Vector3 armsDefaultRot;
+  private float bobTimer = 0f;
+  private float lastMouseX = 0f;
+  private float currentArmsSway = 0f;
 
   private void Awake()
   {
@@ -180,6 +239,8 @@ public class FirstPersonController : MonoBehaviour
     rightDashParticleSystem = GameObject.Find("RightDashParticles").GetComponent<ParticleSystem>();
 
     rb = GetComponent<Rigidbody>();
+    heartDisplay.InitializeHearts(maxLives); 
+    heartDisplay.UpdateHearts(lives); 
 
     crosshairObject = GetComponentInChildren<Image>();
 
@@ -187,6 +248,26 @@ public class FirstPersonController : MonoBehaviour
     playerCamera.fieldOfView = fov;
     originalScale = transform.localScale;
     jointOriginalPos = joint.localPosition;
+
+    if (dashAudioSource == null)
+    {
+        dashAudioSource = GetComponent<AudioSource>();
+    }
+
+    // Add this new check for collision audio source
+    if (collisionAudioSource == null)
+    {
+        // Try to find a second audio source, or create one if needed
+        AudioSource[] sources = GetComponents<AudioSource>();
+        if (sources.Length > 1)
+        {
+            collisionAudioSource = sources[1];
+        }
+        else
+        {
+            collisionAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     if (!unlimitedSprint)
     {
@@ -202,8 +283,27 @@ public class FirstPersonController : MonoBehaviour
 
     // Initial position for resetting on death
     initialPosition = transform.position;
+
+    // Store default arms position and rotation
+    if (armsHolder != null)
+    {
+      armsDefaultPos = armsHolder.localPosition;
+      armsDefaultRot = armsHolder.localEulerAngles;
+    }
+
+    if (instance != null && instance != this)
+    {
+      Destroy(gameObject);
+      return;
+    }
+    instance = this;
   }
 
+  public void ReduceDashCooldown(float reduction)
+  {
+    dashCooldown = Mathf.Max(dashCooldown - reduction, 0.1f);
+    dashCooldownReset = dashCooldown; // Update the reset value too
+  }
 
   public void ResetPosition()
   {
@@ -211,33 +311,59 @@ public class FirstPersonController : MonoBehaviour
     rb.linearVelocity = Vector3.zero;
   }
 
-
   #region Collision
   private void OnCollisionEnter(Collision collision)
   {
     if (collision.gameObject.CompareTag("Obstacle"))
     {
+      
+      // Play collision sound with random pitch variation
+      if (collisionAudioSource != null && obstacleCollisionSound != null)
+      {
+          // Calculate random pitch based on collision force
+          float collisionForce = collision.relativeVelocity.magnitude;
+          float randomPitch = collisionBasePitch + Random.Range(-collisionPitchVariation, collisionPitchVariation);
+          
+          // Optionally adjust pitch based on collision force
+          randomPitch = Mathf.Clamp(randomPitch * (collisionForce / 10f), 0.5f, 1.5f);
+          
+          collisionAudioSource.pitch = randomPitch;
+          collisionAudioSource.PlayOneShot(obstacleCollisionSound, collisionVolume);
+      }
+
       ContactPoint contact = collision.GetContact(0);
       Vector3 bounceDirection = contact.normal;
-      
+
       Vector3 currentVelocity = rb.linearVelocity;
-      float upwardForce = 8f;  
+      float upwardForce = 8f;
       float horizontalForce = 100f;
-      
+
       // Zero out velocity in collision direction
       float dotProduct = Vector3.Dot(currentVelocity, bounceDirection);
       if (dotProduct < 0)
       {
-          rb.linearVelocity -= bounceDirection * dotProduct;
+        rb.linearVelocity -= bounceDirection * dotProduct;
       }
-      
+
       // Apply bounce force with reduced vertical component
       Vector3 bounceForce = new Vector3(
           bounceDirection.x * horizontalForce,
-          bounceDirection.y * upwardForce + 5f,  
+          bounceDirection.y * upwardForce + 5f,
           bounceDirection.z * horizontalForce
       );
       rb.AddForce(bounceForce, ForceMode.VelocityChange);
+
+      lives--;
+      Debug.Log("Hit obstacle, lives: " + lives);
+      heartDisplay.UpdateHearts(lives);
+
+      if (lives <= 0)
+      {
+        Debug.Log("Game Over");
+        ResetPosition();
+        lives = maxLives;
+        heartDisplay.UpdateHearts(lives);
+      }
     }
   }
 
@@ -250,6 +376,12 @@ public class FirstPersonController : MonoBehaviour
       Cursor.lockState = CursorLockMode.Locked;
     }
 
+    // Get the animator component from the player model
+    if (playerModel != null)
+    {
+      animator = playerModel.GetComponent<Animator>();
+    }
+
     if (crosshair)
     {
       crosshairObject.sprite = crosshairImage;
@@ -259,10 +391,6 @@ public class FirstPersonController : MonoBehaviour
     {
       crosshairObject.gameObject.SetActive(false);
     }
-
-    // Set the initial pitch angle
-    // pitch = initialPitch;
-    // playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
 
     #region Sprint Bar
 
@@ -326,6 +454,8 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    // Initialize dash settings
+    dashCooldownReset = dashCooldown;
   }
 
   float camRotation;
@@ -339,6 +469,20 @@ public class FirstPersonController : MonoBehaviour
     }
 
     if (isInteracting) return; // Skip movement and camera updates if interacting with UI
+
+    // Update animations based on movement
+    if (animator != null)
+    {
+      // Get movement speed
+      Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+      float movementSpeed = horizontalVelocity.magnitude;
+
+      // Set animator parameters
+      animator.SetBool("IsGrounded", isGrounded);
+      animator.SetBool("IsJumping", !isGrounded && rb.linearVelocity.y > 0);
+      animator.SetBool("IsFalling", !isGrounded && rb.linearVelocity.y < 0);
+      animator.SetFloat("Speed", movementSpeed, animationBlendSpeed, Time.deltaTime);
+    }
 
     #region Camera
 
@@ -368,42 +512,41 @@ public class FirstPersonController : MonoBehaviour
 
     if (enableZoom)
     {
-      // Changes isZoomed when key is pressed
-      // Behavior for toogle zoom
-      if (Input.GetKeyDown(zoomKey) && !holdToZoom && !isSprinting)
+      // Only allow zoom if player has purchased binoculars
+      if (PlayerInventory.Instance.HasItem("Binoculars"))
       {
-        if (!isZoomed)
+        if (Input.GetKeyDown(zoomKey) && !holdToZoom && !isSprinting)
         {
-          isZoomed = true;
+          if (!isZoomed)
+          {
+            isZoomed = true;
+          }
+          else
+          {
+            isZoomed = false;
+          }
         }
-        else
-        {
-          isZoomed = false;
-        }
-      }
 
-      // Changes isZoomed when key is pressed
-      // Behavior for hold to zoom
-      if (holdToZoom && !isSprinting)
-      {
-        if (Input.GetKeyDown(zoomKey))
+        if (holdToZoom && !isSprinting)
         {
-          isZoomed = true;
+          if (Input.GetKey(zoomKey))
+          {
+            isZoomed = true;
+          }
+          else
+          {
+            isZoomed = false;
+          }
         }
-        else if (Input.GetKeyUp(zoomKey))
-        {
-          isZoomed = false;
-        }
-      }
 
-      // Lerps camera.fieldOfView to allow for a smooth transistion
-      if (isZoomed)
-      {
-        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, zoomFOV, zoomStepTime * Time.deltaTime);
-      }
-      else if (!isZoomed && !isSprinting)
-      {
-        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, zoomStepTime * Time.deltaTime);
+        if (isZoomed)
+        {
+          playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, zoomFOV, zoomStepTime * Time.deltaTime);
+        }
+        else if (!isZoomed && !isSprinting)
+        {
+          playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, zoomStepTime * Time.deltaTime);
+        }
       }
     }
 
@@ -465,6 +608,25 @@ public class FirstPersonController : MonoBehaviour
 
     if (enableDash)
     {
+      if (Input.GetKeyDown(dashKey) && !isDashing && !isSprintCooldown && !isDashCooldown)
+      {
+        dashCooldown = dashCooldownReset; // Use the reset value
+        if (dashRemaining > 0f && !isDashCooldown)
+        {
+          wantsToDash = true;
+          // Calculate dash direction here so it matches the exact moment of input
+          dashMoveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+          if (dashMoveDirection.magnitude < 0.1f)
+          {
+            dashMoveDirection = transform.forward;
+          }
+          else
+          {
+            dashMoveDirection = transform.TransformDirection(dashMoveDirection);
+          }
+        }
+      }
+
       if (isDashing)
       {
         float dashProgress = (Time.time - dashStartTime) / dashDuration;
@@ -541,26 +703,12 @@ public class FirstPersonController : MonoBehaviour
       HeadBob();
     }
 
-    // Check for dash input in Update
-    if (enableDash && Input.GetKeyDown(dashKey) && !isDashing)
+    // Update arms position and rotation
+    if (armsHolder != null)
     {
-      Debug.Log($"Dash key pressed - Cooldown: {isDashCooldown}, Remaining: {dashRemaining}, Can Dash: {dashRemaining > 0f && !isDashCooldown}");
-
-      if (dashRemaining > 0f && !isDashCooldown)
-      {
-        wantsToDash = true;
-        // Calculate dash direction here so it matches the exact moment of input
-        dashMoveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        if (dashMoveDirection.magnitude < 0.1f)
-        {
-          dashMoveDirection = transform.forward;
-        }
-        else
-        {
-          dashMoveDirection = transform.TransformDirection(dashMoveDirection);
-        }
-      }
+      UpdateArmsPosition();
     }
+
   }
 
   void FixedUpdate()
@@ -701,23 +849,40 @@ public class FirstPersonController : MonoBehaviour
 
   private void PlayDashParticles()
   {
+
+
+    // Play the dash sound effect
+    if (dashAudioSource != null && dashSound != null)
+    {
+        dashAudioSource.PlayOneShot(dashSound, dashVolume);
+    }
+
+
     // Vector3 inputVector = dashMoveDirection;
     // Debug.Log(Input.GetKey());
     // Determine the direction of the dash and play the appropriate particle system
     float verticalInput = Input.GetAxis("Vertical");
     float horizontalInput = Input.GetAxis("Horizontal");
 
-    if (verticalInput > 0) {
+    if (verticalInput > 0)
+    {
       forwardDashParticleSystem.Play();
       Debug.Log("Forward Dash");
-    } else if (verticalInput < 0) {
+    }
+    else if (verticalInput < 0)
+    {
       backwardDashParticleSystem.Play();
       Debug.Log("Backward Dash");
-    } else if (horizontalInput < 0) {
+    }
+    else if (horizontalInput < 0)
+    {
       leftDashParticleSystem.Play();
-    } else if (horizontalInput > 0) {
+    }
+    else if (horizontalInput > 0)
+    {
       rightDashParticleSystem.Play();
     }
+    
 
     // // if (inputVector.z > 0 && Mathf.Abs(inputVector.x) <= inputVector.z) // Forward dash
     // if (Input.GetKey(KeyCode.W) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
@@ -746,8 +911,41 @@ public class FirstPersonController : MonoBehaviour
 
     // forwardDashParticleSystem.Play();
   }
-}
 
+  private void UpdateArmsPosition()
+  {
+    // Calculate head bob
+    float bobSpeed = isSprinting ? sprintBobSpeed : walkBobSpeed;
+    Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+    
+    if (horizontalVelocity.magnitude > 0.1f && isGrounded)
+    {
+      bobTimer += Time.deltaTime * bobSpeed;
+      float bobOffset = Mathf.Sin(bobTimer) * armsBobAmount;
+      armsHolder.localPosition = armsDefaultPos + new Vector3(0, bobOffset, 0);
+    }
+    else
+    {
+      bobTimer = 0;
+      armsHolder.localPosition = Vector3.Lerp(armsHolder.localPosition, armsDefaultPos, Time.deltaTime * 5f);
+    }
+
+    // Calculate arms sway based on mouse movement
+    float mouseDelta = Input.GetAxis("Mouse X");
+    float targetSway = -mouseDelta * armsSwayAmount;
+    currentArmsSway = Mathf.Lerp(currentArmsSway, targetSway, Time.deltaTime * armsSwaySpeed);
+    
+    // Apply sway rotation
+    Vector3 targetRotation = armsDefaultRot + new Vector3(0, 0, currentArmsSway);
+    armsHolder.localEulerAngles = targetRotation;
+
+    // Return to center when no input
+    if (Mathf.Abs(mouseDelta) < 0.1f)
+    {
+      currentArmsSway = Mathf.Lerp(currentArmsSway, 0, Time.deltaTime * armsSwaySpeed);
+    }
+  }
+}
 
 
 // Custom Editor
@@ -771,7 +969,7 @@ public class FirstPersonControllerEditor : Editor
     EditorGUILayout.Space();
     GUILayout.Label("Modular First Person Controller", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 16 });
     GUILayout.Label("By Jess Case", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
-    GUILayout.Label("version 1.0.1", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
+    GUILayout.Label("version 1.0.6", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
     EditorGUILayout.Space();
 
     #region Camera Setup
@@ -985,14 +1183,83 @@ public class FirstPersonControllerEditor : Editor
     GUI.enabled = true;
 
     #endregion
+    
+    #region Lives
+
+    EditorGUILayout.Space();
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Lives Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+    fpc.lives = EditorGUILayout.IntField(new GUIContent("Lives", "Determines how many lives the player has."), fpc.lives);
+    fpc.maxLives = EditorGUILayout.IntField(new GUIContent("Max Lives", "Determines the maximum amount of lives the player can have."), fpc.maxLives);
+
+    fpc.heartDisplay = (HeartDisplay)EditorGUILayout.ObjectField(new GUIContent("Heart Display", "Heart display script that will update the UI."), fpc.heartDisplay, typeof(HeartDisplay), true);
+    #endregion
+
+    #region Audio Setup
+    EditorGUILayout.Space();
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Audio Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+    // Dash Sound Controls
+    SerializedProperty dashAudioSourceProp = SerFPC.FindProperty("dashAudioSource");
+    SerializedProperty dashSoundProp = SerFPC.FindProperty("dashSound");
+    SerializedProperty dashVolumeProp = SerFPC.FindProperty("dashVolume");
+
+    // Collision Sound Controls
+    SerializedProperty collisionAudioSourceProp = SerFPC.FindProperty("collisionAudioSource");
+    SerializedProperty collisionSoundProp = SerFPC.FindProperty("obstacleCollisionSound");
+    SerializedProperty collisionVolumeProp = SerFPC.FindProperty("collisionVolume");
+    SerializedProperty collisionBasePitchProp = SerFPC.FindProperty("collisionBasePitch");
+    SerializedProperty collisionPitchVariationProp = SerFPC.FindProperty("collisionPitchVariation");
+
+    GUILayout.Label("Dash Audio", EditorStyles.boldLabel);
+    EditorGUILayout.PropertyField(dashAudioSourceProp, new GUIContent("Dash Audio Source", "The Audio Source component that will play the dash sound."));
+    EditorGUILayout.PropertyField(dashSoundProp, new GUIContent("Dash Sound", "The sound effect that plays when dashing."));
+    EditorGUILayout.PropertyField(dashVolumeProp, new GUIContent("Dash Volume", "Volume of the dash sound effect (0-1)."));
+
+    EditorGUILayout.Space();
+
+    GUILayout.Label("Collision Audio", EditorStyles.boldLabel);
+    EditorGUILayout.PropertyField(collisionAudioSourceProp, new GUIContent("Collision Audio Source", "The Audio Source component that will play collision sounds."));
+    EditorGUILayout.PropertyField(collisionSoundProp, new GUIContent("Collision Sound", "The sound effect that plays when hitting obstacles."));
+    EditorGUILayout.PropertyField(collisionVolumeProp, new GUIContent("Collision Volume", "Volume of the collision sound effect (0-1)."));
+    EditorGUILayout.PropertyField(collisionBasePitchProp, new GUIContent("Base Pitch", "The center pitch for collision sounds (1 is normal pitch)"));
+    EditorGUILayout.PropertyField(collisionPitchVariationProp, new GUIContent("Pitch Variation", "How much the pitch can randomly vary up or down"));
+
+    EditorGUILayout.Space();
+
+    #endregion
+
+    #region Animation
+
+    EditorGUILayout.Space();
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Animation Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+    fpc.playerModel = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Player Model", "Reference to the player model with animations."), fpc.playerModel, typeof(GameObject), true);
+    fpc.armsHolder = (Transform)EditorGUILayout.ObjectField(new GUIContent("Arms Holder", "Parent object for the arms model."), fpc.armsHolder, typeof(Transform), true);
+    fpc.armsBobAmount = EditorGUILayout.Slider(new GUIContent("Arms Bob Amount", "How much the arms move up/down while walking."), fpc.armsBobAmount, 0.01f, 0.1f);
+    fpc.armsSwayAmount = EditorGUILayout.Slider(new GUIContent("Arms Sway Amount", "How much the arms sway left/right with mouse movement."), fpc.armsSwayAmount, 0.01f, 0.5f);
+    fpc.armsSwaySpeed = EditorGUILayout.Slider(new GUIContent("Arms Sway Speed", "How fast the arms return to center."), fpc.armsSwaySpeed, 1f, 10f);
+    fpc.walkBobSpeed = EditorGUILayout.Slider(new GUIContent("Walk Bob Speed", "Speed of walking head bob."), fpc.walkBobSpeed, 1f, 20f);
+    fpc.sprintBobSpeed = EditorGUILayout.Slider(new GUIContent("Sprint Bob Speed", "Speed of sprinting head bob."), fpc.sprintBobSpeed, 1f, 20f);
+    fpc.animationBlendSpeed = EditorGUILayout.Slider(new GUIContent("Animation Blend Speed", "Smoothing for animations."), fpc.animationBlendSpeed, 0.01f, 1f);
+    fpc.movementThreshold = EditorGUILayout.Slider(new GUIContent("Movement Threshold", "Minimum movement to trigger running."), fpc.movementThreshold, 0.01f, 1f);
+
+    #endregion
 
     //Sets any changes from the prefab
     if (GUI.changed)
     {
-      EditorUtility.SetDirty(fpc);
-      Undo.RecordObject(fpc, "FPC Change");
-      SerFPC.ApplyModifiedProperties();
+        EditorUtility.SetDirty(fpc);
+        Undo.RecordObject(fpc, "FPC Change");
+        SerFPC.ApplyModifiedProperties();
     }
+
   }
 
 }
