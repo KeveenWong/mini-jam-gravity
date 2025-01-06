@@ -161,6 +161,16 @@ public class FirstPersonController : MonoBehaviour
 
   #endregion
 
+  #region Lives
+  public int lives = 3;
+  public int maxLives = 3;
+  // public Image[] hearts;
+  // public Sprite fullHeart;
+  // public Sprite emptyHeart;
+  public HeartDisplay heartDisplay;
+
+  #endregion
+
   #region Particles
   [SerializeField] ParticleSystem forwardDashParticleSystem;
   [SerializeField] ParticleSystem backwardDashParticleSystem;
@@ -180,6 +190,8 @@ public class FirstPersonController : MonoBehaviour
     rightDashParticleSystem = GameObject.Find("RightDashParticles").GetComponent<ParticleSystem>();
 
     rb = GetComponent<Rigidbody>();
+    heartDisplay.InitializeHearts(maxLives); 
+    heartDisplay.UpdateHearts(lives); 
 
     crosshairObject = GetComponentInChildren<Image>();
 
@@ -219,25 +231,37 @@ public class FirstPersonController : MonoBehaviour
     {
       ContactPoint contact = collision.GetContact(0);
       Vector3 bounceDirection = contact.normal;
-      
+
       Vector3 currentVelocity = rb.linearVelocity;
-      float upwardForce = 8f;  
+      float upwardForce = 8f;
       float horizontalForce = 100f;
-      
+
       // Zero out velocity in collision direction
       float dotProduct = Vector3.Dot(currentVelocity, bounceDirection);
       if (dotProduct < 0)
       {
-          rb.linearVelocity -= bounceDirection * dotProduct;
+        rb.linearVelocity -= bounceDirection * dotProduct;
       }
-      
+
       // Apply bounce force with reduced vertical component
       Vector3 bounceForce = new Vector3(
           bounceDirection.x * horizontalForce,
-          bounceDirection.y * upwardForce + 5f,  
+          bounceDirection.y * upwardForce + 5f,
           bounceDirection.z * horizontalForce
       );
       rb.AddForce(bounceForce, ForceMode.VelocityChange);
+
+      lives--;
+      Debug.Log("Hit obstacle, lives: " + lives);
+      heartDisplay.UpdateHearts(lives);
+
+      if (lives <= 0)
+      {
+        Debug.Log("Game Over");
+        ResetPosition();
+        lives = maxLives;
+        heartDisplay.UpdateHearts(lives);
+      }
     }
   }
 
@@ -707,15 +731,22 @@ public class FirstPersonController : MonoBehaviour
     float verticalInput = Input.GetAxis("Vertical");
     float horizontalInput = Input.GetAxis("Horizontal");
 
-    if (verticalInput > 0) {
+    if (verticalInput > 0)
+    {
       forwardDashParticleSystem.Play();
       Debug.Log("Forward Dash");
-    } else if (verticalInput < 0) {
+    }
+    else if (verticalInput < 0)
+    {
       backwardDashParticleSystem.Play();
       Debug.Log("Backward Dash");
-    } else if (horizontalInput < 0) {
+    }
+    else if (horizontalInput < 0)
+    {
       leftDashParticleSystem.Play();
-    } else if (horizontalInput > 0) {
+    }
+    else if (horizontalInput > 0)
+    {
       rightDashParticleSystem.Play();
     }
 
@@ -983,6 +1014,20 @@ public class FirstPersonControllerEditor : Editor
     fpc.bobSpeed = EditorGUILayout.Slider(new GUIContent("Speed", "Determines how often a bob rotation is completed."), fpc.bobSpeed, 1, 20);
     fpc.bobAmount = EditorGUILayout.Vector3Field(new GUIContent("Bob Amount", "Determines the amount the joint moves in both directions on every axes."), fpc.bobAmount);
     GUI.enabled = true;
+
+    #endregion
+
+    #region Lives
+
+    EditorGUILayout.Space();
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Lives Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+    fpc.lives = EditorGUILayout.IntField(new GUIContent("Lives", "Determines how many lives the player has."), fpc.lives);
+    fpc.maxLives = EditorGUILayout.IntField(new GUIContent("Max Lives", "Determines the maximum amount of lives the player can have."), fpc.maxLives);
+
+    fpc.heartDisplay = (HeartDisplay)EditorGUILayout.ObjectField(new GUIContent("Heart Display", "Heart display script that will update the UI."), fpc.heartDisplay, typeof(HeartDisplay), true);
 
     #endregion
 

@@ -1,14 +1,5 @@
 fileFormatVersion: 2
 guid: d90ba6530d9bfda47abb4610956b2f44
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
   productId: 189884
@@ -16,3 +7,25 @@ AssetOrigin:
   packageVersion: 1.0.1
   assetPath: Assets/ModularFirstPersonController/FirstPersonController/FirstPersonController.cs
   uploadId: 428261
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerCamera: {instanceID: 0}
+  - crosshairImage: {instanceID: 0}
+  - sprintBarBG: {instanceID: 0}
+  - sprintBar: {instanceID: 0}
+  - dashBarBG: {instanceID: 0}
+  - dashBar: {instanceID: 0}
+  - joint: {instanceID: 0}
+  - fullHeart: {fileID: -947330640, guid: 319836053292bf84f94c63683d2d8698, type: 3}
+  - emptyHeart: {fileID: -1692379545, guid: 319836053292bf84f94c63683d2d8698, type: 3}
+  - forwardDashParticleSystem: {instanceID: 0}
+  - backwardDashParticleSystem: {instanceID: 0}
+  - leftDashParticleSystem: {instanceID: 0}
+  - rightDashParticleSystem: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
