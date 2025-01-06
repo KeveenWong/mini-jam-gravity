@@ -165,10 +165,13 @@ public class FirstPersonController : MonoBehaviour
   #region Lives
   public int lives = 3;
   public int maxLives = 3;
+  public PlayerDeathHandler deathHandler;
   // public Image[] hearts;
   // public Sprite fullHeart;
   // public Sprite emptyHeart;
   public HeartDisplay heartDisplay;
+  public GameObject deathScreenUI; // Assign the Canvas GameObject in the Inspector
+  public Transform respawnPoint;  // Assign a spawn point in the scene
 
   #endregion
 
@@ -197,10 +200,15 @@ public class FirstPersonController : MonoBehaviour
 
   private void Awake()
   {
+    if (deathScreenUI != null)
+    {
+      deathScreenUI.SetActive(false);
+    }
     forwardDashParticleSystem = GameObject.Find("ForwardDashParticles").GetComponent<ParticleSystem>();
     backwardDashParticleSystem = GameObject.Find("BackwardDashParticles").GetComponent<ParticleSystem>();
     leftDashParticleSystem = GameObject.Find("LeftDashParticles").GetComponent<ParticleSystem>();
     rightDashParticleSystem = GameObject.Find("RightDashParticles").GetComponent<ParticleSystem>();
+    PlayerDeathHandler deathHandler = GetComponent<PlayerDeathHandler>();
 
     rb = GetComponent<Rigidbody>();
     heartDisplay.InitializeHearts(maxLives); 
@@ -254,6 +262,8 @@ public class FirstPersonController : MonoBehaviour
   {
     transform.position = initialPosition;
     rb.linearVelocity = Vector3.zero;
+    rb.angularVelocity = Vector3.zero;
+    
   }
 
 
@@ -306,11 +316,71 @@ public class FirstPersonController : MonoBehaviour
       if (lives <= 0)
       {
         Debug.Log("Game Over");
-        ResetPosition();
-        lives = maxLives;
-        heartDisplay.UpdateHearts(lives);
+        TriggerDeath();
       }
     }
+  }
+  
+  public void TriggerDeath()
+  {
+    // Freeze the scene
+    FreezeScene();
+
+    // Show the death screen UI
+    if (deathScreenUI != null)
+    {
+      deathScreenUI.SetActive(true);
+    }
+
+    // Unlock the cursor for UI interaction
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
+
+    Debug.Log("Player has died!");
+  }
+
+  private void FreezeScene()
+  {
+    // Freeze time
+    Time.timeScale = 0f;
+    
+      playerCanMove = false;
+      cameraCanMove = false;
+  }
+  private void UnfreezeScene()
+  {
+    // Unfreeze time
+    Time.timeScale = 1f;
+
+    playerCanMove = true;
+    cameraCanMove = true;
+  }
+
+  public void Respawn()
+  {
+    UnfreezeScene();
+    
+    // Hide the death screen UI
+    if (deathScreenUI != null)
+    {
+      deathScreenUI.SetActive(false);
+    }
+
+    
+    ResetPosition();
+    
+    lives = maxLives;
+    heartDisplay.UpdateHearts(lives);
+    Cursor.lockState = CursorLockMode.Locked;
+    Cursor.visible = false;
+
+    Debug.Log("Player has respawned!");
+  }
+
+  public void QuitGame()
+  {
+    Debug.Log("Quit Game");
+    Application.Quit();
   }
 
   #endregion
@@ -332,9 +402,7 @@ public class FirstPersonController : MonoBehaviour
       crosshairObject.gameObject.SetActive(false);
     }
 
-    // Set the initial pitch angle
-    // pitch = initialPitch;
-    // playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+
 
     #region Sprint Bar
 
@@ -1121,6 +1189,20 @@ public class FirstPersonControllerEditor : Editor
     EditorGUILayout.PropertyField(collisionPitchVariationProp, new GUIContent("Pitch Variation", "How much the pitch can randomly vary up or down"));
 
     EditorGUILayout.Space();
+
+    #endregion
+
+    #region deathScreen
+
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Death Screen UI", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+// Add a configurable field for the Death Screen UI
+    fpc.deathScreenUI = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Death Screen UI", "The UI Canvas that appears when the player dies."), fpc.deathScreenUI, typeof(GameObject), true);
+
+    EditorGUILayout.Space();
+
 
     #endregion
 
