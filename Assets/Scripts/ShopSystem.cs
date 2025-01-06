@@ -86,24 +86,72 @@ public class ShopSystem : MonoBehaviour
 
             if (itemImage != null) itemImage.sprite = item.itemImage;
             if (itemName != null) itemName.text = item.itemName;
-            if (itemCost != null) itemCost.text = $"{item.cost} coins";
+            if (itemCost != null) itemCost.text = $"{item.cost}";
+            
+            // Add tooltip component and set description
+            ShopItemTooltip tooltip = newItem.AddComponent<ShopItemTooltip>();
+            tooltip.SetDescription(item.description);
             
             if (buyButton != null)
             {
                 // Store item reference for the button click
                 ShopItem capturedItem = item;
                 buyButton.onClick.AddListener(() => TryPurchaseItem(capturedItem));
+                
+                // Check if item has reached purchase limit
+                int purchaseCount = PlayerInventory.Instance.GetPurchaseCount(item.itemName);
+                if (purchaseCount >= item.maxPurchases)
+                {
+                    buyButton.interactable = false;
+                }
             }
         }
     }
 
     private void TryPurchaseItem(ShopItem item)
     {
+        // Check if item has reached purchase limit
+        int currentPurchases = PlayerInventory.Instance.GetPurchaseCount(item.itemName);
+        if (currentPurchases >= item.maxPurchases)
+        {
+            Debug.Log($"{item.itemName} has reached its purchase limit!");
+            return;
+        }
+
         if (GameManager.Instance.GetCurrency() >= item.cost)
         {
             GameManager.Instance.SpendCurrency(item.cost);
-            UpdateCurrencyDisplay();  // Update currency after purchase
-            // TODO: Add logic to give the item to the player
+            UpdateCurrencyDisplay();
+            
+            // Add item to player's inventory
+            PlayerInventory.Instance.AddItem(item.itemName);
+            
+            // Update dash cooldown if this was a Dash Cooldown purchase
+            if (item.itemName == "Dash Cooldown")
+            {
+                FirstPersonController.Instance.ReduceDashCooldown(0.5f);
+            }
+            
+            // Update button state if item has reached purchase limit
+            currentPurchases = PlayerInventory.Instance.GetPurchaseCount(item.itemName);
+            if (currentPurchases >= item.maxPurchases)
+            {
+                // Find and disable the button for this item
+                foreach (Transform child in itemContainer)
+                {
+                    TextMeshProUGUI nameText = child.GetComponentInChildren<TextMeshProUGUI>();
+                    if (nameText != null && nameText.text == item.itemName)
+                    {
+                        Button buyButton = child.GetComponentInChildren<Button>();
+                        if (buyButton != null)
+                        {
+                            buyButton.interactable = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            
 
             // Play purchase sound
             if (audioSource != null && purchaseSound != null)
