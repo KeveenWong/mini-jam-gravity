@@ -11,7 +11,11 @@ public class GameManager : MonoBehaviour
     
     // Optional: Reference to UI Text to display score
     [SerializeField] private TextMeshProUGUI scoreText;
-
+    [SerializeField] private GameObject title3DText; // Reference to the 3D title text
+    [SerializeField] private GameObject instructions3DText; // Reference to the 3D instructions text
+    
+    private bool gameStarted = false;
+    
     private void Awake()
     {
         // Singleton setup
@@ -25,6 +29,72 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    private void Start()
+    {
+        // Ensure UI is visible at the start
+        if (title3DText != null) title3DText.SetActive(true);
+        if (instructions3DText != null) instructions3DText.SetActive(true);
+
+        // Freeze the entire scene
+        FreezeScene();
+    }
+    
+    private void Update()
+    {
+        // Listen for WASD input to start the game
+        if (!gameStarted && CheckInput())
+        {
+            StartGame();
+        }
+    }
+
+    private bool CheckInput()
+    {
+        return Input.GetKeyDown(KeyCode.W);
+    }
+    
+
+    private void StartGame()
+    {
+        gameStarted = true;
+
+        // Hide 3D UI elements
+        if (title3DText != null) title3DText.SetActive(false);
+        if (instructions3DText != null) instructions3DText.SetActive(false);
+        
+        UnfreezeScene();
+
+    }
+
+    private void FreezeScene()
+    {
+        // Freeze time
+        Time.timeScale = 0f;
+
+        // Optional: Disable player input manually (if needed)
+        var playerController = FindObjectOfType<FirstPersonController>();
+        if (playerController != null)
+        {
+            playerController.playerCanMove = false;
+            playerController.cameraCanMove = false;
+        }
+    }
+
+    private void UnfreezeScene()
+    {
+        // Unfreeze time
+        Time.timeScale = 1f;
+
+        // Enable player input manually (if needed)
+        var playerController = FindObjectOfType<FirstPersonController>();
+        if (playerController != null)
+        {
+            playerController.playerCanMove = true;
+            playerController.cameraCanMove = true;
+        }
+    }
+
 
     public void AddScore(int amount)
     {
