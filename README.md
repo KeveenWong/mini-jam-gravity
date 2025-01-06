@@ -12,7 +12,7 @@ You can check out the game here: [A Big Hole](https://keveenwong.itch.io/a-big-h
 
 - [Kevin Wong](https://github.com/keveenwong) – Programming & Design
 - [Robbie Laughlen](https://github.com/Robbity) - Programming & Music
-- [Kelvin Chen](https://itch.io/profile/KelvinnC) – Programming & UI
+- [Kelvin Chen](https://github.com/KelvinnC) – Programming & UI
 - [Yucheng Li](https://github.com/ycheng11065) - Programming & Level Design
 - [Davin Leong](https://github.com/davinleong) – Programming & Animations
 
