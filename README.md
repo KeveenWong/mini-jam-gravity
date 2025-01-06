@@ -1,6 +1,6 @@
 # A Big Hole
 
-Game Jam Submission for [Mini Jam 175: Gravity](https://itch.io/jam/mini-jam-175-gravity/entries).
+Game Jam Submission for [Mini Jam 175: Gravity](https://itch.io/jam/mini-jam-175-gravity/).
 
 You can check out the game here: [A Big Hole](https://keveenwong.itch.io/a-big-hole)
 
