@@ -188,7 +188,8 @@ public class FirstPersonController : MonoBehaviour
   // public Sprite fullHeart;
   // public Sprite emptyHeart;
   public HeartDisplay heartDisplay;
-  public GameObject deathScreenUI; // Assign the Canvas GameObject in the Inspector
+  public GameObject deathScreenUI;
+  public GameObject victoryScreenUI;// Assign the Canvas GameObject in the Inspector
   public Transform respawnPoint;  // Assign a spawn point in the scene
 
   #endregion
@@ -270,7 +271,9 @@ public class FirstPersonController : MonoBehaviour
             collisionAudioSource = gameObject.AddComponent<AudioSource>();
         }
     }
-
+    deathScreenUI.SetActive(false);
+    victoryScreenUI.SetActive(false);
+    
     if (!unlimitedSprint)
     {
       sprintRemaining = sprintDuration;
@@ -384,6 +387,25 @@ public class FirstPersonController : MonoBehaviour
     Cursor.visible = true;
 
     Debug.Log("Player has died!");
+  }
+  
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject.CompareTag("Final"))
+    {
+      TriggerVictory();
+    }
+  }
+  
+  private void TriggerVictory()
+  {
+    // Freeze the scene
+    FreezeScene();
+    
+    victoryScreenUI.SetActive(true);
+    
+
+    Debug.Log("Victory!");
   }
 
   private void FreezeScene()
@@ -1320,13 +1342,19 @@ public class FirstPersonControllerEditor : Editor
     EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
     GUILayout.Label("Death Screen UI", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
     EditorGUILayout.Space();
-
-// Add a configurable field for the Death Screen UI
     fpc.deathScreenUI = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Death Screen UI", "The UI Canvas that appears when the player dies."), fpc.deathScreenUI, typeof(GameObject), true);
-
     EditorGUILayout.Space();
+    
+    #endregion
+    
+    #region victoryScreen
 
-
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Victory Screen UI", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+    fpc.victoryScreenUI = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Victory Screen UI", "The UI Canvas that appears when the player wins."), fpc.victoryScreenUI, typeof(GameObject), true);
+    EditorGUILayout.Space();
+    
     #endregion
 
     //Sets any changes from the prefab
