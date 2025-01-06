@@ -64,9 +64,6 @@ public class FirstPersonController : MonoBehaviour
   public float walkSpeed = 5f;
   public float maxVelocityChange = 10f;
   private Vector3 initialPosition;
-  public GameObject deathScreenUI;
-  public Transform respawnPoint;
-  private bool isDead = false;
 
   // Internal Variables
   private bool isWalking = false;
@@ -243,41 +240,7 @@ public class FirstPersonController : MonoBehaviour
   //     rb.AddForce(bounceForce, ForceMode.VelocityChange);
   //   }
   // }
-  private void OnCollisionEnter(Collision collision)
-  {
-    if (collision.gameObject.CompareTag("Obstacle")&& !isDead))
-    {
-      TriggerDeath();
-    }
-  }
-
-  private void TriggerDeath()
-  {
-    isDead = true;
-    if (deathScreenUI != null)
-    {
-      deathScreenUI.SetActive(true);
-    }
-    playerCanMove = false;
-    cameraCanMove = false;
-  }
-
-  private void Respawn()
-  {
-    if (deathScreenUI != null)
-    {
-      deathScreenUI.SetActive(false);
-    }
-
-    transform.position = respawnPoint.position;
-    transform.rotation = respawnPoint.rotation;
-    isDead = false;
-
-    playerCanMove = true;
-    cameraCanMove = true;
-    
-  }
-
+  
   #endregion
 
   void Start()
@@ -364,11 +327,7 @@ public class FirstPersonController : MonoBehaviour
     #endregion
 
   }
-  public void QuitGame()
-  {
-    Debug.Log("Quit Game");
-    Application.Quit();
-  }
+
 
   float camRotation;
 
