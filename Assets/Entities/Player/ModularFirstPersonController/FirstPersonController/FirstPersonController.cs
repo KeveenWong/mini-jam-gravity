@@ -64,6 +64,9 @@ public class FirstPersonController : MonoBehaviour
   public float walkSpeed = 5f;
   public float maxVelocityChange = 10f;
   private Vector3 initialPosition;
+  public GameObject deathScreenUI;
+  public Transform respawnPoint;
+  private bool isDead = false;
 
   // Internal Variables
   private bool isWalking = false;
@@ -213,32 +216,66 @@ public class FirstPersonController : MonoBehaviour
 
 
   #region Collision
+  // private void OnCollisionEnter(Collision collision)
+  // {
+  //   if (collision.gameObject.CompareTag("Obstacle"))
+  //   {
+  //     ContactPoint contact = collision.GetContact(0);
+  //     Vector3 bounceDirection = contact.normal;
+  //     
+  //     Vector3 currentVelocity = rb.linearVelocity;
+  //     float upwardForce = 8f;  
+  //     float horizontalForce = 100f;
+  //     
+  //     // Zero out velocity in collision direction
+  //     float dotProduct = Vector3.Dot(currentVelocity, bounceDirection);
+  //     if (dotProduct < 0)
+  //     {
+  //         rb.linearVelocity -= bounceDirection * dotProduct;
+  //     }
+  //     
+  //     // Apply bounce force with reduced vertical component
+  //     Vector3 bounceForce = new Vector3(
+  //         bounceDirection.x * horizontalForce,
+  //         bounceDirection.y * upwardForce + 5f,  
+  //         bounceDirection.z * horizontalForce
+  //     );
+  //     rb.AddForce(bounceForce, ForceMode.VelocityChange);
+  //   }
+  // }
   private void OnCollisionEnter(Collision collision)
   {
-    if (collision.gameObject.CompareTag("Obstacle"))
+    if (collision.gameObject.CompareTag("Obstacle")&& !isDead))
     {
-      ContactPoint contact = collision.GetContact(0);
-      Vector3 bounceDirection = contact.normal;
-      
-      Vector3 currentVelocity = rb.linearVelocity;
-      float upwardForce = 8f;  
-      float horizontalForce = 100f;
-      
-      // Zero out velocity in collision direction
-      float dotProduct = Vector3.Dot(currentVelocity, bounceDirection);
-      if (dotProduct < 0)
-      {
-          rb.linearVelocity -= bounceDirection * dotProduct;
-      }
-      
-      // Apply bounce force with reduced vertical component
-      Vector3 bounceForce = new Vector3(
-          bounceDirection.x * horizontalForce,
-          bounceDirection.y * upwardForce + 5f,  
-          bounceDirection.z * horizontalForce
-      );
-      rb.AddForce(bounceForce, ForceMode.VelocityChange);
+      TriggerDeath();
     }
+  }
+
+  private void TriggerDeath()
+  {
+    isDead = true;
+    if (deathScreenUI != null)
+    {
+      deathScreenUI.SetActive(true);
+    }
+    playerCanMove = false;
+    cameraCanMove = false;
+  }
+
+  private void Respawn()
+  {
+    if (deathScreenUI != null)
+    {
+      deathScreenUI.SetActive(false);
+    }
+
+    transform.position = respawnPoint.position;
+    transform.rotation = respawnPoint.rotation;
+    isDead = false;
+
+    playerCanMove = true;
+    cameraCanMove = true;
+    
   }
 
   #endregion
@@ -326,6 +363,11 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+  }
+  public void QuitGame()
+  {
+    Debug.Log("Quit Game");
+    Application.Quit();
   }
 
   float camRotation;
