@@ -131,6 +131,11 @@ public class ShopSystem : MonoBehaviour
             {
                 FirstPersonController.Instance.ReduceDashCooldown(0.5f);
             }
+            // Increase max lives if this was a More Life purchase
+            else if (item.itemName == "More Life")
+            {
+                FirstPersonController.Instance.IncreaseMaxLives();
+            }
             
             // Update button state if item has reached purchase limit
             currentPurchases = PlayerInventory.Instance.GetPurchaseCount(item.itemName);
