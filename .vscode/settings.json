@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "mini-jam-gravity.sln"
+    "dotnet.defaultSolution": "dropper-mini-jam-gravity.sln"
 }

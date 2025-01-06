@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Random = UnityEngine.Random;
 
 
 #if UNITY_EDITOR
@@ -161,11 +162,33 @@ public class FirstPersonController : MonoBehaviour
 
   #endregion
 
+  #region Lives
+  public int lives = 3;
+  public int maxLives = 3;
+  // public Image[] hearts;
+  // public Sprite fullHeart;
+  // public Sprite emptyHeart;
+  public HeartDisplay heartDisplay;
+
+  #endregion
+
   #region Particles
   [SerializeField] ParticleSystem forwardDashParticleSystem;
   [SerializeField] ParticleSystem backwardDashParticleSystem;
   [SerializeField] ParticleSystem leftDashParticleSystem;
   [SerializeField] ParticleSystem rightDashParticleSystem;
+
+  [Header("Audio")]
+  [SerializeField] private AudioSource dashAudioSource;  // Reference to the AudioSource component
+  [SerializeField] private AudioClip dashSound;          // The dash sound effect to play
+  [SerializeField] [Range(0f, 1f)] private float dashVolume = 1f;  // Adjustable volume for dash sound
+
+  // Add these new fields for collision audio
+  [SerializeField] private AudioSource collisionAudioSource;  // Separate audio source for collision sounds
+  [SerializeField] private AudioClip obstacleCollisionSound;  // The sound to play when hitting obstacles
+  [SerializeField] [Range(0f, 1f)] private float collisionVolume = 1f;  // Collision sound volume
+  [SerializeField] [Range(0.5f, 1.5f)] private float collisionBasePitch = 1f;  // Base pitch for collision sounds
+  [SerializeField] [Range(0f, 0.5f)] private float collisionPitchVariation = 0.1f;  // Pitch variation for more natural sound
 
   #endregion
 
@@ -180,6 +203,8 @@ public class FirstPersonController : MonoBehaviour
     rightDashParticleSystem = GameObject.Find("RightDashParticles").GetComponent<ParticleSystem>();
 
     rb = GetComponent<Rigidbody>();
+    heartDisplay.InitializeHearts(maxLives); 
+    heartDisplay.UpdateHearts(lives); 
 
     crosshairObject = GetComponentInChildren<Image>();
 
@@ -187,6 +212,26 @@ public class FirstPersonController : MonoBehaviour
     playerCamera.fieldOfView = fov;
     originalScale = transform.localScale;
     jointOriginalPos = joint.localPosition;
+
+    if (dashAudioSource == null)
+    {
+        dashAudioSource = GetComponent<AudioSource>();
+    }
+
+    // Add this new check for collision audio source
+    if (collisionAudioSource == null)
+    {
+        // Try to find a second audio source, or create one if needed
+        AudioSource[] sources = GetComponents<AudioSource>();
+        if (sources.Length > 1)
+        {
+            collisionAudioSource = sources[1];
+        }
+        else
+        {
+            collisionAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     if (!unlimitedSprint)
     {
@@ -213,34 +258,61 @@ public class FirstPersonController : MonoBehaviour
 
 
   #region Collision
-  // private void OnCollisionEnter(Collision collision)
-  // {
-  //   if (collision.gameObject.CompareTag("Obstacle"))
-  //   {
-  //     ContactPoint contact = collision.GetContact(0);
-  //     Vector3 bounceDirection = contact.normal;
-  //     
-  //     Vector3 currentVelocity = rb.linearVelocity;
-  //     float upwardForce = 8f;  
-  //     float horizontalForce = 100f;
-  //     
-  //     // Zero out velocity in collision direction
-  //     float dotProduct = Vector3.Dot(currentVelocity, bounceDirection);
-  //     if (dotProduct < 0)
-  //     {
-  //         rb.linearVelocity -= bounceDirection * dotProduct;
-  //     }
-  //     
-  //     // Apply bounce force with reduced vertical component
-  //     Vector3 bounceForce = new Vector3(
-  //         bounceDirection.x * horizontalForce,
-  //         bounceDirection.y * upwardForce + 5f,  
-  //         bounceDirection.z * horizontalForce
-  //     );
-  //     rb.AddForce(bounceForce, ForceMode.VelocityChange);
-  //   }
-  // }
-  
+  private void OnCollisionEnter(Collision collision)
+  {
+    if (collision.gameObject.CompareTag("Obstacle"))
+    {
+      
+      // Play collision sound with random pitch variation
+      if (collisionAudioSource != null && obstacleCollisionSound != null)
+      {
+          // Calculate random pitch based on collision force
+          float collisionForce = collision.relativeVelocity.magnitude;
+          float randomPitch = collisionBasePitch + Random.Range(-collisionPitchVariation, collisionPitchVariation);
+          
+          // Optionally adjust pitch based on collision force
+          randomPitch = Mathf.Clamp(randomPitch * (collisionForce / 10f), 0.5f, 1.5f);
+          
+          collisionAudioSource.pitch = randomPitch;
+          collisionAudioSource.PlayOneShot(obstacleCollisionSound, collisionVolume);
+      }
+
+      ContactPoint contact = collision.GetContact(0);
+      Vector3 bounceDirection = contact.normal;
+
+      Vector3 currentVelocity = rb.linearVelocity;
+      float upwardForce = 8f;
+      float horizontalForce = 100f;
+
+      // Zero out velocity in collision direction
+      float dotProduct = Vector3.Dot(currentVelocity, bounceDirection);
+      if (dotProduct < 0)
+      {
+        rb.linearVelocity -= bounceDirection * dotProduct;
+      }
+
+      // Apply bounce force with reduced vertical component
+      Vector3 bounceForce = new Vector3(
+          bounceDirection.x * horizontalForce,
+          bounceDirection.y * upwardForce + 5f,
+          bounceDirection.z * horizontalForce
+      );
+      rb.AddForce(bounceForce, ForceMode.VelocityChange);
+
+      lives--;
+      Debug.Log("Hit obstacle, lives: " + lives);
+      heartDisplay.UpdateHearts(lives);
+
+      if (lives <= 0)
+      {
+        Debug.Log("Game Over");
+        ResetPosition();
+        lives = maxLives;
+        heartDisplay.UpdateHearts(lives);
+      }
+    }
+  }
+
   #endregion
 
   void Start()
@@ -327,7 +399,6 @@ public class FirstPersonController : MonoBehaviour
     #endregion
 
   }
-
 
   float camRotation;
 
@@ -702,23 +773,40 @@ public class FirstPersonController : MonoBehaviour
 
   private void PlayDashParticles()
   {
+
+
+    // Play the dash sound effect
+    if (dashAudioSource != null && dashSound != null)
+    {
+        dashAudioSource.PlayOneShot(dashSound, dashVolume);
+    }
+
+
     // Vector3 inputVector = dashMoveDirection;
     // Debug.Log(Input.GetKey());
     // Determine the direction of the dash and play the appropriate particle system
     float verticalInput = Input.GetAxis("Vertical");
     float horizontalInput = Input.GetAxis("Horizontal");
 
-    if (verticalInput > 0) {
+    if (verticalInput > 0)
+    {
       forwardDashParticleSystem.Play();
       Debug.Log("Forward Dash");
-    } else if (verticalInput < 0) {
+    }
+    else if (verticalInput < 0)
+    {
       backwardDashParticleSystem.Play();
       Debug.Log("Backward Dash");
-    } else if (horizontalInput < 0) {
+    }
+    else if (horizontalInput < 0)
+    {
       leftDashParticleSystem.Play();
-    } else if (horizontalInput > 0) {
+    }
+    else if (horizontalInput > 0)
+    {
       rightDashParticleSystem.Play();
     }
+    
 
     // // if (inputVector.z > 0 && Mathf.Abs(inputVector.x) <= inputVector.z) // Forward dash
     // if (Input.GetKey(KeyCode.W) && enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
@@ -986,14 +1074,64 @@ public class FirstPersonControllerEditor : Editor
     GUI.enabled = true;
 
     #endregion
+    
+    #region Lives
+
+    EditorGUILayout.Space();
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Lives Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+    fpc.lives = EditorGUILayout.IntField(new GUIContent("Lives", "Determines how many lives the player has."), fpc.lives);
+    fpc.maxLives = EditorGUILayout.IntField(new GUIContent("Max Lives", "Determines the maximum amount of lives the player can have."), fpc.maxLives);
+
+    fpc.heartDisplay = (HeartDisplay)EditorGUILayout.ObjectField(new GUIContent("Heart Display", "Heart display script that will update the UI."), fpc.heartDisplay, typeof(HeartDisplay), true);
+    #endregion
+
+    #region Audio Setup
+    EditorGUILayout.Space();
+    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+    GUILayout.Label("Audio Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+    EditorGUILayout.Space();
+
+    // Dash Sound Controls
+    SerializedProperty dashAudioSourceProp = SerFPC.FindProperty("dashAudioSource");
+    SerializedProperty dashSoundProp = SerFPC.FindProperty("dashSound");
+    SerializedProperty dashVolumeProp = SerFPC.FindProperty("dashVolume");
+
+    // Collision Sound Controls
+    SerializedProperty collisionAudioSourceProp = SerFPC.FindProperty("collisionAudioSource");
+    SerializedProperty collisionSoundProp = SerFPC.FindProperty("obstacleCollisionSound");
+    SerializedProperty collisionVolumeProp = SerFPC.FindProperty("collisionVolume");
+    SerializedProperty collisionBasePitchProp = SerFPC.FindProperty("collisionBasePitch");
+    SerializedProperty collisionPitchVariationProp = SerFPC.FindProperty("collisionPitchVariation");
+
+    GUILayout.Label("Dash Audio", EditorStyles.boldLabel);
+    EditorGUILayout.PropertyField(dashAudioSourceProp, new GUIContent("Dash Audio Source", "The Audio Source component that will play the dash sound."));
+    EditorGUILayout.PropertyField(dashSoundProp, new GUIContent("Dash Sound", "The sound effect that plays when dashing."));
+    EditorGUILayout.PropertyField(dashVolumeProp, new GUIContent("Dash Volume", "Volume of the dash sound effect (0-1)."));
+
+    EditorGUILayout.Space();
+
+    GUILayout.Label("Collision Audio", EditorStyles.boldLabel);
+    EditorGUILayout.PropertyField(collisionAudioSourceProp, new GUIContent("Collision Audio Source", "The Audio Source component that will play collision sounds."));
+    EditorGUILayout.PropertyField(collisionSoundProp, new GUIContent("Collision Sound", "The sound effect that plays when hitting obstacles."));
+    EditorGUILayout.PropertyField(collisionVolumeProp, new GUIContent("Collision Volume", "Volume of the collision sound effect (0-1)."));
+    EditorGUILayout.PropertyField(collisionBasePitchProp, new GUIContent("Base Pitch", "The center pitch for collision sounds (1 is normal pitch)"));
+    EditorGUILayout.PropertyField(collisionPitchVariationProp, new GUIContent("Pitch Variation", "How much the pitch can randomly vary up or down"));
+
+    EditorGUILayout.Space();
+
+    #endregion
 
     //Sets any changes from the prefab
     if (GUI.changed)
     {
-      EditorUtility.SetDirty(fpc);
-      Undo.RecordObject(fpc, "FPC Change");
-      SerFPC.ApplyModifiedProperties();
+        EditorUtility.SetDirty(fpc);
+        Undo.RecordObject(fpc, "FPC Change");
+        SerFPC.ApplyModifiedProperties();
     }
+
   }
 
 }

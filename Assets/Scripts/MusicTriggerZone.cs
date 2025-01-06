@@ -27,14 +27,24 @@ public class MusicTriggerZone : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
+{
+    Debug.Log($"Trigger entered by: {other.gameObject.name} with tag: {other.tag}");
+    if (other.CompareTag("Player") && !musicStarted)
     {
-        if (other.CompareTag("Player") && !musicStarted)
+        Debug.Log("Player entered, attempting to play music");
+        if (musicSource != null)
         {
+            Debug.Log("Music source found, starting playback");
             musicStarted = true;
             musicSource.Play();
             StartCoroutine(FadeInMusic());
         }
+        else
+        {
+            Debug.LogError("Music source is null!");
+        }
     }
+}
 
     private System.Collections.IEnumerator FadeInMusic()
     {
